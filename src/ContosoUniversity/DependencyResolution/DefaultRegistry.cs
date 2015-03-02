@@ -29,7 +29,9 @@ namespace ContosoUniversity.DependencyResolution {
                 scan => {
                     scan.TheCallingAssembly();
                     scan.WithDefaultConventions();
-					scan.With(new ControllerConvention());
+                    scan.LookForRegistries();
+                    scan.AssemblyContainingType<DefaultRegistry>();
+                    scan.With(new ControllerConvention());
                 });
             For<SchoolContext>().Use<SchoolContext>().LifecycleIs<TransientLifecycle>();
         }

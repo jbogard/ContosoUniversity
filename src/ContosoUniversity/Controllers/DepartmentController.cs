@@ -1,32 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using ContosoUniversity.DAL;
-using ContosoUniversity.Models;
-using System.Data.Entity.Infrastructure;
-
-namespace ContosoUniversity.Controllers
+﻿namespace ContosoUniversity.Controllers
 {
+    using System;
+    using System.Data;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using DAL;
+    using Features.Department;
+    using MediatR;
+    using Models;
+
     public class DepartmentController : Controller
     {
         private SchoolContext db;
+        private readonly IMediator _mediator;
 
-        public DepartmentController(SchoolContext db)
+        public DepartmentController(SchoolContext db, IMediator mediator)
         {
             this.db = db;
+            _mediator = mediator;
         }
 
         // GET: Department
         public async Task<ActionResult> Index()
         {
-            var departments = db.Departments.Include(d => d.Administrator);
-            return View(await departments.ToListAsync());
+            var model = await _mediator.SendAsync(new IndexQuery());
+            return View(model);
         }
 
         // GET: Department/Details/5
@@ -63,7 +65,8 @@ namespace ContosoUniversity.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "DepartmentID,Name,Budget,StartDate,InstructorID")] Department department)
+        public async Task<ActionResult> Create(
+            [Bind(Include = "DepartmentID,Name,Budget,StartDate,InstructorID")] Department department)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +102,7 @@ namespace ContosoUniversity.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int? id, byte[] rowVersion)
         {
-            string[] fieldsToBind = new string[] { "Name", "Budget", "StartDate", "InstructorID", "RowVersion" };
+            string[] fieldsToBind = {"Name", "Budget", "StartDate", "InstructorID", "RowVersion"};
 
             if (id == null)
             {
@@ -130,7 +133,7 @@ namespace ContosoUniversity.Controllers
                 catch (DbUpdateConcurrencyException ex)
                 {
                     var entry = ex.Entries.Single();
-                    var clientValues = (Department)entry.Entity;
+                    var clientValues = (Department) entry.Entity;
                     var databaseEntry = entry.GetDatabaseValues();
                     if (databaseEntry == null)
                     {
@@ -139,32 +142,39 @@ namespace ContosoUniversity.Controllers
                     }
                     else
                     {
-                        var databaseValues = (Department)databaseEntry.ToObject();
+                        var databaseValues = (Department) databaseEntry.ToObject();
 
                         if (databaseValues.Name != clientValues.Name)
                             ModelState.AddModelError("Name", "Current value: "
-                                + databaseValues.Name);
+                                                             + databaseValues.Name);
                         if (databaseValues.Budget != clientValues.Budget)
                             ModelState.AddModelError("Budget", "Current value: "
-                                + String.Format("{0:c}", databaseValues.Budget));
+                                                               + String.Format("{0:c}", databaseValues.Budget));
                         if (databaseValues.StartDate != clientValues.StartDate)
                             ModelState.AddModelError("StartDate", "Current value: "
-                                + String.Format("{0:d}", databaseValues.StartDate));
+                                                                  + String.Format("{0:d}", databaseValues.StartDate));
                         if (databaseValues.InstructorID != clientValues.InstructorID)
                             ModelState.AddModelError("InstructorID", "Current value: "
-                                + db.Instructors.Find(databaseValues.InstructorID).FullName);
+                                                                     +
+                                                                     db.Instructors.Find(databaseValues.InstructorID)
+                                                                         .FullName);
                         ModelState.AddModelError(string.Empty, "The record you attempted to edit "
-                            + "was modified by another user after you got the original value. The "
-                            + "edit operation was canceled and the current values in the database "
-                            + "have been displayed. If you still want to edit this record, click "
-                            + "the Save button again. Otherwise click the Back to List hyperlink.");
+                                                               +
+                                                               "was modified by another user after you got the original value. The "
+                                                               +
+                                                               "edit operation was canceled and the current values in the database "
+                                                               +
+                                                               "have been displayed. If you still want to edit this record, click "
+                                                               +
+                                                               "the Save button again. Otherwise click the Back to List hyperlink.");
                         departmentToUpdate.RowVersion = databaseValues.RowVersion;
                     }
                 }
                 catch (RetryLimitExceededException /* dex */)
                 {
                     //Log the error (uncomment dex variable name and add a line here to write a log.
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                    ModelState.AddModelError("",
+                        "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }
             ViewBag.InstructorID = new SelectList(db.Instructors, "ID", "FullName", departmentToUpdate.InstructorID);
@@ -191,11 +201,11 @@ namespace ContosoUniversity.Controllers
             if (concurrencyError.GetValueOrDefault())
             {
                 ViewBag.ConcurrencyErrorMessage = "The record you attempted to delete "
-                    + "was modified by another user after you got the original values. "
-                    + "The delete operation was canceled and the current values in the "
-                    + "database have been displayed. If you still want to delete this "
-                    + "record, click the Delete button again. Otherwise "
-                    + "click the Back to List hyperlink.";
+                                                  + "was modified by another user after you got the original values. "
+                                                  + "The delete operation was canceled and the current values in the "
+                                                  + "database have been displayed. If you still want to delete this "
+                                                  + "record, click the Delete button again. Otherwise "
+                                                  + "click the Back to List hyperlink.";
             }
 
             return View(department);
@@ -214,12 +224,13 @@ namespace ContosoUniversity.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                return RedirectToAction("Delete", new { concurrencyError = true, id = department.DepartmentID });
+                return RedirectToAction("Delete", new {concurrencyError = true, id = department.DepartmentID});
             }
             catch (DataException /* dex */)
             {
                 //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
-                ModelState.AddModelError(string.Empty, "Unable to delete. Try again, and if the problem persists contact your system administrator.");
+                ModelState.AddModelError(string.Empty,
+                    "Unable to delete. Try again, and if the problem persists contact your system administrator.");
                 return View(department);
             }
         }
