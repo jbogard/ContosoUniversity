@@ -138,6 +138,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\FeatureViewLocationRazorViewEngine.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Migrations\201411021828194_InitialCreate.cs" />
@@ -206,35 +207,35 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Features\Web.config" />
+    <Content Include="Features\_ViewStart.cshtml" />
+    <Content Include="Features\Shared\Error.cshtml" />
+    <Content Include="Features\Shared\_Layout.cshtml" />
+    <Content Include="Features\Home\About.cshtml" />
+    <Content Include="Features\Home\Contact.cshtml" />
+    <Content Include="Features\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Student\Create.cshtml" />
-    <Content Include="Views\Student\Delete.cshtml" />
-    <Content Include="Views\Student\Details.cshtml" />
-    <Content Include="Views\Student\Edit.cshtml" />
-    <Content Include="Views\Student\Index.cshtml" />
-    <Content Include="Views\Course\Create.cshtml" />
-    <Content Include="Views\Course\Delete.cshtml" />
-    <Content Include="Views\Course\Details.cshtml" />
-    <Content Include="Views\Course\Edit.cshtml" />
-    <Content Include="Views\Course\Index.cshtml" />
-    <Content Include="Views\Instructor\Create.cshtml" />
-    <Content Include="Views\Instructor\Delete.cshtml" />
-    <Content Include="Views\Instructor\Details.cshtml" />
-    <Content Include="Views\Instructor\Edit.cshtml" />
-    <Content Include="Views\Instructor\Index.cshtml" />
-    <Content Include="Views\Department\Create.cshtml" />
-    <Content Include="Views\Department\Delete.cshtml" />
-    <Content Include="Views\Department\Details.cshtml" />
-    <Content Include="Views\Department\Edit.cshtml" />
-    <Content Include="Views\Department\Index.cshtml" />
-    <Content Include="Views\Course\UpdateCourseCredits.cshtml" />
+    <Content Include="Features\Student\Create.cshtml" />
+    <Content Include="Features\Student\Delete.cshtml" />
+    <Content Include="Features\Student\Details.cshtml" />
+    <Content Include="Features\Student\Edit.cshtml" />
+    <Content Include="Features\Student\Index.cshtml" />
+    <Content Include="Features\Course\Create.cshtml" />
+    <Content Include="Features\Course\Delete.cshtml" />
+    <Content Include="Features\Course\Details.cshtml" />
+    <Content Include="Features\Course\Edit.cshtml" />
+    <Content Include="Features\Course\Index.cshtml" />
+    <Content Include="Features\Instructor\Create.cshtml" />
+    <Content Include="Features\Instructor\Delete.cshtml" />
+    <Content Include="Features\Instructor\Details.cshtml" />
+    <Content Include="Features\Instructor\Edit.cshtml" />
+    <Content Include="Features\Instructor\Index.cshtml" />
+    <Content Include="Features\Department\Create.cshtml" />
+    <Content Include="Features\Department\Delete.cshtml" />
+    <Content Include="Features\Department\Details.cshtml" />
+    <Content Include="Features\Department\Edit.cshtml" />
+    <Content Include="Features\Department\Index.cshtml" />
+    <Content Include="Features\Course\UpdateCourseCredits.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
