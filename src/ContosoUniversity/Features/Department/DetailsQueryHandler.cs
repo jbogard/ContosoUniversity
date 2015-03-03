@@ -5,7 +5,7 @@
     using MediatR;
     using Models;
 
-    public class DetailsQueryHandler : IAsyncRequestHandler<DetailsQuery, Department>
+    public class DetailsQueryHandler : IAsyncRequestHandler<DetailsQuery, DetailsModel>
     {
         private readonly SchoolContext _context;
 
@@ -14,10 +14,14 @@
             _context = context;
         }
 
-        public async Task<Department> Handle(DetailsQuery message)
+        public async Task<DetailsModel> Handle(DetailsQuery message)
         {
-            string query = "SELECT * FROM Department WHERE DepartmentID = @p0";
-            Department department = await _context.Departments.SqlQuery(query, message.Id).SingleOrDefaultAsync();
+            string query = @"
+SELECT d.*, p.LastName + ', ' + p.FirstName AS [AdministratorFullName]
+FROM Department d
+LEFT OUTER JOIN Person p ON d.InstructorID = p.ID
+WHERE d.DepartmentID = @p0";
+            DetailsModel department = await _context.Database.SqlQuery<DetailsModel>(query, message.Id).SingleOrDefaultAsync();
 
             return department;
         }

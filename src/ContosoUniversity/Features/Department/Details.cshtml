@@ -1,4 +1,4 @@
-﻿@model ContosoUniversity.Models.Department
+﻿@model ContosoUniversity.Features.Department.DetailsModel
 
 @{
     ViewBag.Title = "Details";
@@ -39,7 +39,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Administrator.FullName)
+            @Html.DisplayFor(model => model.AdministratorFullName)
         </dd>
     </dl>
 </div>

@@ -3,7 +3,7 @@
     using MediatR;
     using Models;
 
-    public class DetailsQuery : IAsyncRequest<Department>
+    public class DetailsQuery : IAsyncRequest<DetailsModel>
     {
         public int? Id { get; set; }
     }
