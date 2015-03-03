@@ -1,13 +1,13 @@
 ﻿namespace ContosoUniversity.Features.Department
 {
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Threading.Tasks;
+    using AutoMapper.QueryableExtensions;
     using DAL;
+    using Infrastructure.Mapping;
     using MediatR;
-    using Models;
 
-    public class IndexQueryHandler : IAsyncRequestHandler<IndexQuery, List<Department>>
+    public class IndexQueryHandler : IAsyncRequestHandler<IndexQuery, List<IndexModel>>
     {
         private readonly SchoolContext _context;
 
@@ -16,9 +16,10 @@
             _context = context;
         }
 
-        public Task<List<Department>> Handle(IndexQuery message)
+        public async Task<List<IndexModel>> Handle(IndexQuery message)
         {
-            return _context.Departments.Include(d => d.Administrator).ToListAsync();
+            return await _context.Departments
+                .Project().ToListAsync<IndexModel>();
         }
     }
 }

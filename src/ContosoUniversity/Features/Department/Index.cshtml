@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ContosoUniversity.Models.Department>
+﻿@model IEnumerable<ContosoUniversity.Features.Department.IndexModel>
 @{
     ViewBag.Title = "Departments";
 }
@@ -35,7 +35,7 @@
                 @Html.DisplayFor(modelItem => item.StartDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Administrator.FullName)
+                @Html.DisplayFor(modelItem => item.AdministratorFullName)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.DepartmentID }) |

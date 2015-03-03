@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ContosoUniversity.Models
 {
+    using DelegateDecompiler;
+
     public abstract class Person
     {
         public int ID { get; set; }
@@ -18,6 +20,7 @@ namespace ContosoUniversity.Models
         public string FirstMidName { get; set; }
 
         [Display(Name = "Full Name")]
+        [Computed]
         public string FullName
         {
             get

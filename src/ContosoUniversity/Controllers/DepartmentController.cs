@@ -8,6 +8,7 @@
     using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using System.Web.WebPages;
     using DAL;
     using Features.Department;
     using MediatR;
@@ -32,19 +33,14 @@
         }
 
         // GET: Department/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public async Task<ActionResult> Details(DetailsQuery query)
         {
-            if (id == null)
+            if (query.Id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            // Commenting out original code to show how to use a raw SQL query.
-            //Department department = await db.Departments.FindAsync(id);
-
-            // Create and execute raw SQL query.
-            string query = "SELECT * FROM Department WHERE DepartmentID = @p0";
-            Department department = await db.Departments.SqlQuery(query, id).SingleOrDefaultAsync();
+            var department = await _mediator.SendAsync(query);
 
             if (department == null)
             {

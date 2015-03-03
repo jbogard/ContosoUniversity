@@ -23,13 +23,14 @@ using WebActivatorEx;
 [assembly: ApplicationShutdownMethod(typeof(StructuremapMvc), "End")]
 
 namespace ContosoUniversity.App_Start {
-	using System.Web.Mvc;
+    using System.Web;
+    using System.Web.Mvc;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
 	using ContosoUniversity.DependencyResolution;
-
-    using StructureMap;
+	using Infrastructure.Mapping;
+	using StructureMap;
     
 	public static class StructuremapMvc {
         #region Public Properties
@@ -49,6 +50,7 @@ namespace ContosoUniversity.App_Start {
             StructureMapDependencyScope = new StructureMapDependencyScope(container);
             DependencyResolver.SetResolver(StructureMapDependencyScope);
             DynamicModuleUtility.RegisterModule(typeof(StructureMapScopeModule));
+            AutoMapperBootstrapper.Initialize(container);
         }
 
         #endregion
