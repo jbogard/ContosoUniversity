@@ -61,18 +61,17 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(
-            [Bind(Include = "DepartmentID,Name,Budget,StartDate,InstructorID")] Department department)
+        public async Task<ActionResult> Create(CreateModel model)
         {
             if (ModelState.IsValid)
             {
-                db.Departments.Add(department);
-                await db.SaveChangesAsync();
+                await _mediator.SendAsync(model);
+
                 return RedirectToAction("Index");
             }
 
-            ViewBag.InstructorID = new SelectList(db.Instructors, "ID", "FullName", department.InstructorID);
-            return View(department);
+            ViewBag.InstructorID = new SelectList(db.Instructors, "ID", "FullName", model.InstructorID);
+            return View(model);
         }
 
         // GET: Department/Edit/5

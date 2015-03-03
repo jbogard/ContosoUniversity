@@ -8,6 +8,7 @@
         protected override void Configure()
         {
             CreateMap<Department, IndexModel>();
+            CreateMap<CreateModel, Department>(MemberList.Source);
         }
     }
 }

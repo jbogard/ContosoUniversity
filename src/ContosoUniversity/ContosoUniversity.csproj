@@ -190,6 +190,8 @@
     <Compile Include="DependencyResolution\IoC.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyScope.cs" />
     <Compile Include="DependencyResolution\StructureMapScopeModule.cs" />
+    <Compile Include="Features\Department\CreateHandler.cs" />
+    <Compile Include="Features\Department\CreateModel.cs" />
     <Compile Include="Features\Department\DetailsModel.cs" />
     <Compile Include="Features\Department\DetailsQuery.cs" />
     <Compile Include="Features\Department\DetailsQueryHandler.cs" />
