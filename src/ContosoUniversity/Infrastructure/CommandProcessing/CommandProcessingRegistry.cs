@@ -1,5 +1,6 @@
 ﻿namespace ContosoUniversity.Infrastructure.CommandProcessing
 {
+    using FluentValidation;
     using MediatR;
     using StructureMap.Configuration.DSL;
     using StructureMap.Graph;
@@ -16,6 +17,7 @@
 
                 scan.AddAllTypesOf(typeof(IRequestHandler<,>));
                 scan.AddAllTypesOf(typeof(IAsyncRequestHandler<,>));
+                scan.AddAllTypesOf(typeof (IValidator<>));
                 scan.WithDefaultConventions();
             });
 
@@ -23,7 +25,7 @@
             For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
             For(typeof(IRequestHandler<,>)).DecorateAllWith(typeof(MediatorPipeline<,>));
             For(typeof(RequestHandler<>)).DecorateAllWith(typeof(CommandPipeline<>));
-            For(typeof(IMessageValidator<>)).Use(typeof(FluentValidationMessageValidator<>));
+            //For(typeof(IMessageValidator<>)).Use(typeof(FluentValidationMessageValidator<>));
         }
     }
 }

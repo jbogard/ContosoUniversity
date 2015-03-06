@@ -180,7 +180,7 @@
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Features\Home\UiController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="DAL\SchoolConfiguration.cs" />
@@ -210,6 +210,7 @@
     <Compile Include="Infrastructure\CommandProcessing\CommandPipeline.cs" />
     <Compile Include="Infrastructure\CommandProcessing\CommandProcessingRegistry.cs" />
     <Compile Include="Infrastructure\CommandProcessing\MediatorPipeline.cs" />
+    <Compile Include="Infrastructure\ControllerFactory.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperBootstrapper.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperRegistry.cs" />
     <Compile Include="Infrastructure\FeatureViewLocationRazorViewEngine.cs" />

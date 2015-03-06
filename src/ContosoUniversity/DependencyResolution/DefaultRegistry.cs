@@ -16,7 +16,9 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace ContosoUniversity.DependencyResolution {
+    using System.Web.Mvc;
     using DAL;
+    using Infrastructure;
     using StructureMap.Configuration.DSL;
     using StructureMap.Graph;
     using StructureMap.Pipeline;
@@ -34,6 +36,7 @@ namespace ContosoUniversity.DependencyResolution {
                     scan.With(new ControllerConvention());
                 });
             For<SchoolContext>().Use<SchoolContext>().LifecycleIs<TransientLifecycle>();
+            For<IControllerFactory>().Use<ControllerFactory>();
         }
 
         #endregion
