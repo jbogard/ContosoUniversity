@@ -25,7 +25,6 @@
             For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
             For(typeof(IRequestHandler<,>)).DecorateAllWith(typeof(MediatorPipeline<,>));
             For(typeof(RequestHandler<>)).DecorateAllWith(typeof(CommandPipeline<>));
-            //For(typeof(IMessageValidator<>)).Use(typeof(FluentValidationMessageValidator<>));
         }
     }
 }
