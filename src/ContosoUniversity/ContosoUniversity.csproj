@@ -64,6 +64,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.5.5.0.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Glimpse.Ado">
       <HintPath>..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
     </Reference>
@@ -203,11 +206,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\CommandProcessing\BaseValidator.cs" />
+    <Compile Include="Infrastructure\CommandProcessing\CommandPipeline.cs" />
     <Compile Include="Infrastructure\CommandProcessing\CommandProcessingRegistry.cs" />
+    <Compile Include="Infrastructure\CommandProcessing\MediatorPipeline.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperBootstrapper.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperRegistry.cs" />
     <Compile Include="Infrastructure\FeatureViewLocationRazorViewEngine.cs" />
     <Compile Include="Infrastructure\Mapping\MappingExtensions.cs" />
+    <Compile Include="Infrastructure\Validation\FluentValidationMessageValidator.cs" />
+    <Compile Include="Infrastructure\Validation\IMessageValidator.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Migrations\201411021828194_InitialCreate.cs" />
