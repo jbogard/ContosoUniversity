@@ -1,4 +1,4 @@
-﻿namespace ContosoUniversity.Controllers
+﻿namespace ContosoUniversity.Features.Department
 {
     using System;
     using System.Data;
@@ -8,18 +8,16 @@
     using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using System.Web.WebPages;
     using DAL;
-    using Features.Department;
     using MediatR;
     using Models;
 
-    public class DepartmentController : Controller
+    public class UiController : Controller
     {
         private SchoolContext db;
         private readonly IMediator _mediator;
 
-        public DepartmentController(SchoolContext db, IMediator mediator)
+        public UiController(SchoolContext db, IMediator mediator)
         {
             this.db = db;
             _mediator = mediator;

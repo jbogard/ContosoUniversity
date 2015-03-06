@@ -178,11 +178,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
-    <Compile Include="Controllers\CourseController.cs" />
-    <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Features\Course\UiController.cs" />
+    <Compile Include="Features\Department\UiController.cs" />
     <Compile Include="Features\Home\UiController.cs" />
-    <Compile Include="Controllers\InstructorController.cs" />
-    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Features\Instructor\UiController.cs" />
+    <Compile Include="Features\Student\UiController.cs" />
     <Compile Include="DAL\SchoolConfiguration.cs" />
     <Compile Include="DAL\SchoolContext.cs" />
     <Compile Include="DAL\SchoolInitializer.cs" />
@@ -330,6 +330,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
