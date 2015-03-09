@@ -82,6 +82,9 @@
     <Reference Include="Glimpse.Mvc5">
       <HintPath>..\packages\Glimpse.Mvc5.1.5.3\lib\net45\Glimpse.Mvc5.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlTags">
+      <HintPath>..\..\lib\HtmlTags.dll</HintPath>
+    </Reference>
     <Reference Include="MediatR">
       <HintPath>..\packages\MediatR.2.0.0-beta-001\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+Xamarin.iOS10+MonoTouch10\MediatR.dll</HintPath>
     </Reference>
@@ -211,10 +214,14 @@
     <Compile Include="Infrastructure\CommandProcessing\CommandProcessingRegistry.cs" />
     <Compile Include="Infrastructure\CommandProcessing\MediatorPipeline.cs" />
     <Compile Include="Infrastructure\ControllerFactory.cs" />
+    <Compile Include="Infrastructure\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperBootstrapper.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperRegistry.cs" />
     <Compile Include="Infrastructure\FeatureViewLocationRazorViewEngine.cs" />
     <Compile Include="Infrastructure\Mapping\MappingExtensions.cs" />
+    <Compile Include="Infrastructure\Tags\DefaultAspNetMvcHtmlConventions.cs" />
+    <Compile Include="Infrastructure\Tags\HtmlTagExtensions.cs" />
+    <Compile Include="Infrastructure\Tags\HtmlTagRegistry.cs" />
     <Compile Include="Infrastructure\Validation\FluentValidationMessageValidator.cs" />
     <Compile Include="Infrastructure\Validation\IMessageValidator.cs" />
     <Compile Include="Logging\ILogger.cs" />
@@ -330,7 +337,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

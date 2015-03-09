@@ -51,7 +51,7 @@
         public ActionResult Create()
         {
             ViewBag.InstructorID = new SelectList(db.Instructors, "ID", "FullName");
-            return View();
+            return View(new CreateModel());
         }
 
         // POST: Department/Create
