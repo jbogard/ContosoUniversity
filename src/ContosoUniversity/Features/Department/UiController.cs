@@ -68,7 +68,6 @@
                 return RedirectToAction("Index");
             }
 
-            ViewBag.InstructorID = new SelectList(db.Instructors, "ID", "FullName", model.InstructorID);
             return View(model);
         }
 

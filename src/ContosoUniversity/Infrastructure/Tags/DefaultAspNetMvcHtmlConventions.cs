@@ -27,7 +27,7 @@
             Labels.ModifyForAttribute<DisplayAttribute>((t, a) => t.Text(a.Name));
             Validators.Always.AddClass("text-danger");
 
-            //Editors.BuilderPolicy<ApplicationEntitySelectElementBuilder>();
+            Editors.BuilderPolicy<InstructorSelectElementBuilder>();
             //Editors.BuilderPolicy<PlantMultiselectElementBuilder>();
             //Editors.BuilderPolicy<ResourceMultiselectElementBuilder>();
             //Editors.BuilderPolicy<MesOperationStatusMultiselectElementBuilder>();

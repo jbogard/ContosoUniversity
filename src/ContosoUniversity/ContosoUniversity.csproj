@@ -214,12 +214,16 @@
     <Compile Include="Infrastructure\CommandProcessing\CommandProcessingRegistry.cs" />
     <Compile Include="Infrastructure\CommandProcessing\MediatorPipeline.cs" />
     <Compile Include="Infrastructure\ControllerFactory.cs" />
+    <Compile Include="Infrastructure\InstructorModelBinder.cs" />
+    <Compile Include="Infrastructure\InstructorModelBinderProvider.cs" />
     <Compile Include="Infrastructure\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperBootstrapper.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperRegistry.cs" />
     <Compile Include="Infrastructure\FeatureViewLocationRazorViewEngine.cs" />
     <Compile Include="Infrastructure\Mapping\MappingExtensions.cs" />
     <Compile Include="Infrastructure\Tags\DefaultAspNetMvcHtmlConventions.cs" />
+    <Compile Include="Infrastructure\Tags\InstructorSelectElementBuilder.cs" />
+    <Compile Include="Infrastructure\Tags\EntitySelectElementBuilder.cs" />
     <Compile Include="Infrastructure\Tags\HtmlTagExtensions.cs" />
     <Compile Include="Infrastructure\Tags\HtmlTagRegistry.cs" />
     <Compile Include="Infrastructure\Validation\FluentValidationMessageValidator.cs" />
@@ -254,6 +258,7 @@
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Enrollment.cs" />
+    <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\Instructor.cs" />
     <Compile Include="Models\OfficeAssignment.cs" />
     <Compile Include="Models\Person.cs" />

@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using MediatR;
+    using Models;
 
     public class CreateModel : IAsyncRequest
     {
@@ -19,6 +20,6 @@
         [Display(Name = "Start Date")]
         public DateTime? StartDate { get; set; }
 
-        public int? InstructorID { get; set; }
+        public Instructor Instructor { get; set; }
     }
 }
