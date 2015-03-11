@@ -17,7 +17,6 @@
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Start Date")]
         public DateTime? StartDate { get; set; }
 
         public Instructor Instructor { get; set; }

@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - Contoso University</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/lodash")
     <script type="text/javascript">
         var appInsights=window.appInsights||function(config){
             function s(config){t[config]=function(){var i=arguments;t.queue.push(function(){t[config].apply(t,i)})}}var t={config:config},r=document,f=window,e="script",o=r.createElement(e),i,u;for(o.src=config.url||"//az416426.vo.msecnd.net/scripts/a/ai.0.js",r.getElementsByTagName(e)[0].parentNode.appendChild(o),t.cookie=r.cookie,t.queue=[],i=["Event","Exception","Metric","PageView","Trace"];i.length;)s("track"+i.pop());return config.disableExceptionTracking||(i="onerror",s("_"+i),u=f[i],f[i]=function(config,r,f,e,o){var s=u&&u(config,r,f,e,o);return s!==!0&&t["_"+i](config,r,f,e,o),s}),t
@@ -55,13 +56,11 @@
     var highlightFields = function (response) {
 
         $('.form-group').removeClass('has-error');
-        $('.text-danger').text('');
 
         $.each(response, function (propName, val) {
             var nameSelector = '[name = "' + propName.replace(/(:|\.|\[|\])/g, "\\$1") + '"]',
-                idSelector = '#' + propName.replace(/(:|\.|\[|\])/g, "\\$1"),
-                vSelector = '#v-' + propName.replace(/(:|\.|\[|\])/g, "\\$1");
-            $el = $(nameSelector) || $(idSelector);
+                idSelector = '#' + propName.replace(/(:|\.|\[|\])/g, "\\$1");
+            var $el = $(nameSelector) || $(idSelector);
 
             if (val.Errors.length > 0) {
                 var $container = $el.closest('.form-group');
@@ -72,7 +71,6 @@
                     $el.closest('p').addClass('has-error');
                     $el.closest('div').addClass('has-error');
                 }
-                $(vSelector).text(val.Errors[0].ErrorMessage);
             }
         });
     };
@@ -80,10 +78,36 @@
         try {
             var data = JSON.parse(xhr.responseText);
             highlightFields(data);
+            showSummary(data);
             window.scrollTo(0, 0);
         } catch (e) {
             // (Hopefully) caught by the generic error handler in `config.js`.
         }
+    };
+    var showSummary = function (response) {
+        $('#validationSummary').empty().removeClass('hidden');
+
+        var verboseErrors = _.flatten(_.pluck(response, 'Errors')),
+            errors = [];
+
+        var nonNullErrors = _.reject(verboseErrors, function (error) {
+            return error.ErrorMessage.indexOf('must not be empty') > -1;
+        });
+
+        _.each(nonNullErrors, function (error) {
+            errors.push(error.ErrorMessage);
+        });
+
+        if (nonNullErrors.length !== verboseErrors.length) {
+            errors.push('The highlighted fields are required to submit this form.');
+        }
+
+        var $ul = $('#validationSummary').append('<ul></ul>');
+
+        _.each(errors, function (error) {
+            var $li = $('<li></li>').text(error);
+            $li.appendTo($ul);
+        });
     };
     var redirect = function (data) {
         if (data.redirect) {

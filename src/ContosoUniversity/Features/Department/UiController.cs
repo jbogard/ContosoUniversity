@@ -9,6 +9,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using DAL;
+    using Infrastructure;
     using MediatR;
     using Models;
 
@@ -61,14 +62,9 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(CreateModel model)
         {
-            if (ModelState.IsValid)
-            {
-                await _mediator.SendAsync(model);
+            await _mediator.SendAsync(model);
 
-                return RedirectToAction("Index");
-            }
-
-            return View(model);
+            return this.RedirectToActionJson("Index");
         }
 
         // GET: Department/Edit/5

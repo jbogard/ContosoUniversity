@@ -2,15 +2,10 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using HtmlTags;
-    using HtmlTags.Conventions;
     using HtmlTags.UI;
-    using HtmlTags.UI.Elements;
-    using HtmlTags.UI.Elements.Builders;
 
     public class DefaultAspNetMvcHtmlConventions : HtmlConventionRegistry
     {
-
         public DefaultAspNetMvcHtmlConventions()
         {
             Editors.Always.AddClass("form-control");
@@ -26,10 +21,6 @@
             Labels.Always.AddClass("control-label");
             Labels.Always.AddClass("col-md-2");
             Labels.ModifyForAttribute<DisplayAttribute>((t, a) => t.Text(a.Name));
-            Validators.Always.AddClass("text-danger");
-            Validators.Always.BuildBy<SpanDisplayBuilder>();
-            Validators.Always.ModifyWith(er => er.CurrentTag.Id("v-" + er.OriginalTag.Id()));
-
             Editors.BuilderPolicy<InstructorSelectElementBuilder>();
             //Editors.BuilderPolicy<PlantMultiselectElementBuilder>();
             //Editors.BuilderPolicy<ResourceMultiselectElementBuilder>();
@@ -38,12 +29,5 @@
             //Editors.Modifier<RequiredFieldModifier>();
             //Labels.Modifier<RequiredFieldModifier>();
         }
-
-
-        public ElementCategoryExpression Validators
-        {
-            get { return new ElementCategoryExpression(Library.For<ElementRequest>().Category("Validators").Profile(TagConstants.Default)); }
-        }
-
     }
 }

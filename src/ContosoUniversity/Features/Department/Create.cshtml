@@ -13,13 +13,12 @@
 
     <div class="form-horizontal">
         <h4>Department</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <hr/>
+        <div class="alert alert-danger hidden" id="validationSummary"></div>
         <div class="form-group">
             @Html.Label(m => m.Name)
             <div class="col-md-10">
                 @Html.Input(m => m.Name)
-                @Html.Validator(m => m.Name)
             </div>
         </div>
 
@@ -27,7 +26,6 @@
             @Html.Label(m => m.Budget)
             <div class="col-md-10">
                 @Html.Input(m => m.Budget)
-                @Html.Validator(m => m.Budget)
             </div>
         </div>
 
@@ -35,7 +33,6 @@
             @Html.Label(m => m.StartDate)
             <div class="col-md-10">
                 @Html.Input(m => m.StartDate)
-                @Html.Validator(m => m.StartDate)
             </div>
         </div>
 
@@ -43,7 +40,6 @@
             @Html.Label(m => m.Instructor)
             <div class="col-md-10">
                 @Html.Input(m => m.Instructor)
-                @Html.Validator(m => m.Instructor)
             </div>
         </div>
 
