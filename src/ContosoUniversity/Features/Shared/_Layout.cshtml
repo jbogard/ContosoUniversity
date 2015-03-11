@@ -55,6 +55,7 @@
     var highlightFields = function (response) {
 
         $('.form-group').removeClass('has-error');
+        $('.text-danger').text('');
 
         $.each(response, function (propName, val) {
             var nameSelector = '[name = "' + propName.replace(/(:|\.|\[|\])/g, "\\$1") + '"]',
