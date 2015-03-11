@@ -51,5 +51,76 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+<script type="text/javascript">
+    var highlightFields = function (response) {
+
+        $('.form-group').removeClass('has-error');
+
+        $.each(response, function (propName, val) {
+            var nameSelector = '[name = "' + propName.replace(/(:|\.|\[|\])/g, "\\$1") + '"]',
+                idSelector = '#' + propName.replace(/(:|\.|\[|\])/g, "\\$1"),
+                vSelector = '#v-' + propName.replace(/(:|\.|\[|\])/g, "\\$1");
+            $el = $(nameSelector) || $(idSelector);
+
+            if (val.Errors.length > 0) {
+                var $container = $el.closest('.form-group');
+
+                if ($container.length > 0) {
+                    $container.addClass('has-error');
+                } else {
+                    $el.closest('p').addClass('has-error');
+                    $el.closest('div').addClass('has-error');
+                }
+                $(vSelector).text(val.Errors[0].ErrorMessage);
+            }
+        });
+    };
+    var highlightErrors = function (xhr) {
+        try {
+            var data = JSON.parse(xhr.responseText);
+            highlightFields(data);
+            window.scrollTo(0, 0);
+        } catch (e) {
+            // (Hopefully) caught by the generic error handler in `config.js`.
+        }
+    };
+    var redirect = function (data) {
+        if (data.redirect) {
+            window.location = data.redirect;
+        } else {
+            window.scrollTo(0, 0);
+            window.location.reload();
+        }
+    };
+
+    $('form[method=post]').not('.no-ajax').on('submit', function () {
+        var submitBtn = $(this).find('[type="submit"]');
+
+        submitBtn.prop('disabled', true);
+        $(window).unbind();
+
+        var $this = $(this),
+            formData = $this.serialize();
+
+        $this.find('div').removeClass('has-error');
+
+        $.ajax({
+            url: $this.attr('action'),
+            type: 'post',
+            data: formData,
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            dataType: 'json',
+            statusCode: {
+                200: redirect
+            },
+            complete: function () {
+                submitBtn.prop('disabled', false);
+            }
+        }).error(highlightErrors);
+
+        return false;
+    });
+
+</script>
 </body>
 </html>

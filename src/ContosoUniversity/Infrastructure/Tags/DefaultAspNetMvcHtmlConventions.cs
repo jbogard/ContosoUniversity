@@ -6,6 +6,7 @@
     using HtmlTags.Conventions;
     using HtmlTags.UI;
     using HtmlTags.UI.Elements;
+    using HtmlTags.UI.Elements.Builders;
 
     public class DefaultAspNetMvcHtmlConventions : HtmlConventionRegistry
     {
@@ -26,6 +27,8 @@
             Labels.Always.AddClass("col-md-2");
             Labels.ModifyForAttribute<DisplayAttribute>((t, a) => t.Text(a.Name));
             Validators.Always.AddClass("text-danger");
+            Validators.Always.BuildBy<SpanDisplayBuilder>();
+            Validators.Always.ModifyWith(er => er.CurrentTag.Id("v-" + er.OriginalTag.Id()));
 
             Editors.BuilderPolicy<InstructorSelectElementBuilder>();
             //Editors.BuilderPolicy<PlantMultiselectElementBuilder>();

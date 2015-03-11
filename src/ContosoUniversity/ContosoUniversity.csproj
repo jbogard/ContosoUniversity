@@ -67,6 +67,9 @@
     <Reference Include="FluentValidation">
       <HintPath>..\packages\FluentValidation.5.5.0.0\lib\Net40\FluentValidation.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation.Mvc">
+      <HintPath>..\packages\FluentValidation.MVC5.5.5.0.0\lib\Net45\FluentValidation.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Glimpse.Ado">
       <HintPath>..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
     </Reference>
@@ -182,6 +185,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Features\Course\UiController.cs" />
+    <Compile Include="Features\Department\CreateValidator.cs" />
     <Compile Include="Features\Department\UiController.cs" />
     <Compile Include="Features\Home\UiController.cs" />
     <Compile Include="Features\Instructor\UiController.cs" />
@@ -209,10 +213,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\CommandProcessing\BaseValidator.cs" />
-    <Compile Include="Infrastructure\CommandProcessing\CommandPipeline.cs" />
     <Compile Include="Infrastructure\CommandProcessing\CommandProcessingRegistry.cs" />
-    <Compile Include="Infrastructure\CommandProcessing\MediatorPipeline.cs" />
     <Compile Include="Infrastructure\ControllerFactory.cs" />
     <Compile Include="Infrastructure\InstructorModelBinder.cs" />
     <Compile Include="Infrastructure\InstructorModelBinderProvider.cs" />
@@ -226,8 +227,8 @@
     <Compile Include="Infrastructure\Tags\EntitySelectElementBuilder.cs" />
     <Compile Include="Infrastructure\Tags\HtmlTagExtensions.cs" />
     <Compile Include="Infrastructure\Tags\HtmlTagRegistry.cs" />
-    <Compile Include="Infrastructure\Validation\FluentValidationMessageValidator.cs" />
-    <Compile Include="Infrastructure\Validation\IMessageValidator.cs" />
+    <Compile Include="Infrastructure\Validation\StructureMapValidatorFactory.cs" />
+    <Compile Include="Infrastructure\ValidatorActionFilter.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Migrations\201411021828194_InitialCreate.cs" />
