@@ -51,7 +51,6 @@
         // GET: Department/Create
         public ActionResult Create()
         {
-            ViewBag.InstructorID = new SelectList(db.Instructors, "ID", "FullName");
             return View(new CreateModel());
         }
 
@@ -64,7 +63,7 @@
         {
             await _mediator.SendAsync(model);
 
-            return this.RedirectToActionJson("Index");
+            return this.RedirectToPreviousPage();
         }
 
         // GET: Department/Edit/5

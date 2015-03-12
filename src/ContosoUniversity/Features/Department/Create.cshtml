@@ -10,38 +10,16 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-
+    @Html.PreviousPageHidden()
+    
     <div class="form-horizontal">
         <h4>Department</h4>
         <hr/>
-        <div class="alert alert-danger hidden" id="validationSummary"></div>
-        <div class="form-group">
-            @Html.Label(m => m.Name)
-            <div class="col-md-10">
-                @Html.Input(m => m.Name)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(m => m.Budget)
-            <div class="col-md-10">
-                @Html.Input(m => m.Budget)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(m => m.StartDate)
-            <div class="col-md-10">
-                @Html.Input(m => m.StartDate)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(m => m.Instructor)
-            <div class="col-md-10">
-                @Html.Input(m => m.Instructor)
-            </div>
-        </div>
+        @Html.ValidationDiv()
+        @Html.FormBlock(m => m.Name)
+        @Html.FormBlock(m => m.Budget)
+        @Html.FormBlock(m => m.StartDate)
+        @Html.FormBlock(m => m.Instructor)
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

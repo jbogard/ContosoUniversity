@@ -1,10 +1,11 @@
-﻿@model IEnumerable<ContosoUniversity.Features.Department.IndexModel>
+﻿@using ContosoUniversity.Features.Department
+@model IEnumerable<ContosoUniversity.Features.Department.IndexModel>
 @{
     ViewBag.Title = "Departments";
 }
 <h2>Departments</h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.Link("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -38,9 +39,9 @@
                 @Html.DisplayFor(modelItem => item.AdministratorFullName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.DepartmentID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.DepartmentID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.DepartmentID })
+                @Html.Link("Edit", "Edit", new {id = item.DepartmentID}) |
+                @Html.Link("Details", "Details", new {id = item.DepartmentID}) |
+                @Html.Link("Delete", "Delete", new {id = item.DepartmentID})
             </td>
         </tr>
     }

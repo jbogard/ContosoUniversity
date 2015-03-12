@@ -1,6 +1,7 @@
 ﻿namespace ContosoUniversity.Infrastructure
 {
     using System;
+    using System.Linq;
     using System.Linq.Expressions;
     using System.Web.Mvc;
     using Newtonsoft.Json;
@@ -51,5 +52,22 @@
             };
         }
 
+        public static ContentResult RedirectToPreviousPage(this Controller controller, string anchor)
+        {
+            string redirectUrl = controller.Request.Params["previousPage"];
+
+            if (redirectUrl != null)
+            {
+                redirectUrl = redirectUrl.Split(',').First();
+            }
+            redirectUrl += anchor;
+
+            return controller.JsonNet(new { redirect = redirectUrl });
+        }
+
+        public static ContentResult RedirectToPreviousPage(this Controller controller)
+        {
+            return RedirectToPreviousPage(controller, "");
+        }
     }
 }
