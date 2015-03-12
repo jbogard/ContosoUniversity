@@ -4,6 +4,7 @@ using System.Web.Mvc;
 namespace ContosoUniversity
 {
     using Infrastructure;
+    using Infrastructure.DataAccess;
 
     public class FilterConfig
     {
@@ -11,6 +12,7 @@ namespace ContosoUniversity
         {
             filters.Add(new HandleErrorAttribute());
             filters.Add(new ValidatorActionFilter());
+            filters.Add(new MvcTransactionFilter());
         }
     }
 }

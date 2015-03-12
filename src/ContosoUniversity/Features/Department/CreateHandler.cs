@@ -20,7 +20,6 @@
             var department = Mapper.Map<CreateModel, Department>(message);
 
             _context.Departments.Add(department);
-            await _context.SaveChangesAsync();
         }
     }
 }

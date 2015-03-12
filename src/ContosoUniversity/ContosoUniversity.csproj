@@ -219,6 +219,7 @@
     <Compile Include="Infrastructure\CommandProcessing\CommandProcessingRegistry.cs" />
     <Compile Include="Infrastructure\ControllerExtensions.cs" />
     <Compile Include="Infrastructure\ControllerFactory.cs" />
+    <Compile Include="Infrastructure\DataAccess\MvcTransactionFilter.cs" />
     <Compile Include="Infrastructure\InstructorModelBinder.cs" />
     <Compile Include="Infrastructure\InstructorModelBinderProvider.cs" />
     <Compile Include="Infrastructure\HtmlHelperExtensions.cs" />

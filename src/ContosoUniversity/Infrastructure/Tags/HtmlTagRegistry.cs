@@ -23,10 +23,10 @@
             {
                 c.Type<ElementRequestActivator>();
                 c.Type<ServiceLocatorTagRequestActivator>();
-            });
+            }); // Collapse
             For<IServiceLocator>().Use<StructureMapServiceLocator>();
             For(typeof(IElementGenerator<>)).Use(typeof(ElementGenerator<>));
-            For<IElementNamingConvention>().Use<DefaultElementNamingConvention>();
+            For<IElementNamingConvention>().Use<DefaultElementNamingConvention>(); // Specify at html convention library
 
             Scan(s =>
             {

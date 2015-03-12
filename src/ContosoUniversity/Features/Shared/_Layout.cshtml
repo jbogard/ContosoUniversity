@@ -63,14 +63,7 @@
             var $el = $(nameSelector) || $(idSelector);
 
             if (val.Errors.length > 0) {
-                var $container = $el.closest('.form-group');
-
-                if ($container.length > 0) {
-                    $container.addClass('has-error');
-                } else {
-                    $el.closest('p').addClass('has-error');
-                    $el.closest('div').addClass('has-error');
-                }
+                $el.closest('.form-group').addClass('has-error');
             }
         });
     };
