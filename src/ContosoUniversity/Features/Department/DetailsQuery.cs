@@ -5,6 +5,6 @@
 
     public class DetailsQuery : IAsyncRequest<DetailsModel>
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
     }
 }

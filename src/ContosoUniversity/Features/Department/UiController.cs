@@ -32,14 +32,14 @@
         }
 
         // GET: Department/Details/5
-        public async Task<ActionResult> Details(DetailsQuery query)
+        public async Task<ActionResult> Details(int? id)
         {
-            if (query.Id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var department = await _mediator.SendAsync(query);
+            var department = await _mediator.SendAsync(new DetailsQuery { Id = id.Value });
 
             if (department == null)
             {

@@ -39,9 +39,9 @@
                 @Html.DisplayFor(modelItem => item.AdministratorFullName)
             </td>
             <td>
-                @Html.Link("Edit", "Edit", new {id = item.DepartmentID}) |
-                @Html.Link("Details", "Details", new {id = item.DepartmentID}) |
-                @Html.Link("Delete", "Delete", new {id = item.DepartmentID})
+                @(Html.Link<UiController>(c => c.Edit(item.DepartmentID), "Edit")) |
+                @(Html.Link<UiController>(c => c.Details(item.DepartmentID), "Details")) |
+                @(Html.Link<UiController>(c => c.Delete(item.DepartmentID, null), "Delete"))
             </td>
         </tr>
     }

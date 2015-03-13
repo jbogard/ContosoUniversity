@@ -223,6 +223,7 @@
     <Compile Include="Infrastructure\InstructorModelBinder.cs" />
     <Compile Include="Infrastructure\InstructorModelBinderProvider.cs" />
     <Compile Include="Infrastructure\HtmlHelperExtensions.cs" />
+    <Compile Include="Infrastructure\LinkBuilder.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperBootstrapper.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperRegistry.cs" />
     <Compile Include="Infrastructure\FeatureViewLocationRazorViewEngine.cs" />
