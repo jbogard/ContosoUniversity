@@ -5,7 +5,7 @@
 }
 <h2>Departments</h2>
 <p>
-    @Html.Link("Create New", "Create")
+    @(Html.Link<UiController>(c => c.Create(), "Create New"))
 </p>
 <table class="table">
     <tr>
