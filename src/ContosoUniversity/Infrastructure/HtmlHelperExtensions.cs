@@ -1,6 +1,7 @@
 ﻿namespace ContosoUniversity.Infrastructure
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq.Expressions;
     using System.Web.Mvc;
     using System.Web.Mvc.Html;
@@ -24,6 +25,19 @@
         {
             var generator = GetGenerator<T>();
             return generator.LabelFor(expression, model: helper.ViewData.Model);
+        }
+
+        public static HtmlTag Display<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression)
+            where T : class
+        {
+            var generator = GetGenerator<T>();
+            return generator.DisplayFor(expression, model: helper.ViewData.Model);
+        }
+
+        public static MvcHtmlString DisplayNameFor<TModel, TValue>(this HtmlHelper<IList<TModel>> html,
+            Expression<Func<TModel, TValue>> expression)
+        {
+            return new HtmlHelper<IEnumerable<TModel>>(html.ViewContext, html.ViewDataContainer).DisplayNameFor(expression);
         }
 
         public static HtmlTag InputBlock<T>(this HtmlHelper<T> helper,

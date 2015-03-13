@@ -1,5 +1,5 @@
 ﻿@using ContosoUniversity.Features.Department
-@model IEnumerable<ContosoUniversity.Features.Department.IndexModel>
+@model IList<IndexModel>
 @{
     ViewBag.Title = "Departments";
 }
@@ -10,7 +10,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @(Html.DisplayNameFor(model => model.Name))
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Budget)
@@ -23,20 +23,21 @@
         </th>
         <th></th>
     </tr>
+    @{ int i = 0; }
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.Display(modelItem => modelItem[i].Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Budget)
+                @Html.Display(modelItem => modelItem[i].Budget)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
+                @Html.Display(modelItem => modelItem[i].StartDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AdministratorFullName)
+                @Html.Display(modelItem => modelItem[i].AdministratorFullName)
             </td>
             <td>
                 @(Html.Link<UiController>(c => c.Edit(item.DepartmentID), "Edit")) |
@@ -44,5 +45,6 @@
                 @(Html.Link<UiController>(c => c.Delete(item.DepartmentID, null), "Delete"))
             </td>
         </tr>
+        i++;
     }
 </table>
