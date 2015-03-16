@@ -2,12 +2,15 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Linq.Expressions;
     using System.Web.Mvc;
     using System.Web.Mvc.Html;
     using System.Web.Routing;
     using App_Start;
     using HtmlTags;
+    using HtmlTags.Conventions;
+    using HtmlTags.Reflection;
     using HtmlTags.UI.Elements;
     using Microsoft.Web.Mvc;
 
@@ -32,6 +35,33 @@
         {
             var generator = GetGenerator<T>();
             return generator.DisplayFor(expression, model: helper.ViewData.Model);
+        }
+
+        public static HtmlTag DisplayLabel<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression)
+            where T : class
+        {
+            return DisplayLabelImpl(expression);
+        }
+
+        public static HtmlTag DisplayLabel<T>(this HtmlHelper<IList<T>> helper, Expression<Func<T, object>> expression)
+            where T : class
+        {
+            return DisplayLabelImpl(expression);
+        }
+
+        private static HtmlTag DisplayLabelImpl<T>(Expression<Func<T, object>> expression) where T : class
+        {
+            var tagGeneratorFactory =
+                StructuremapMvc.StructureMapDependencyScope.CurrentNestedContainer.GetInstance<ITagGeneratorFactory>();
+            var tagGenerator = tagGeneratorFactory.GeneratorFor<ElementRequest>();
+            var request = new ElementRequest(expression.ToAccessor())
+            {
+                Model = default(T)
+            };
+
+            var tag = tagGenerator.Build(request, "DisplayLabels");
+
+            return tag;
         }
 
         public static MvcHtmlString DisplayNameFor<TModel, TValue>(this HtmlHelper<IList<TModel>> html,

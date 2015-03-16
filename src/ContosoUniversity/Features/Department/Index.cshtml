@@ -10,16 +10,16 @@
 <table class="table">
     <tr>
         <th>
-            @(Html.DisplayNameFor(model => model.Name))
+            @Html.DisplayLabel(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Budget)
+            @Html.DisplayLabel(model => model.Budget)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Html.DisplayLabel(model => model.StartDate)
         </th>
         <th>
-            Administrator
+            @Html.DisplayLabel(model => model.AdministratorFullName)
         </th>
         <th></th>
     </tr>

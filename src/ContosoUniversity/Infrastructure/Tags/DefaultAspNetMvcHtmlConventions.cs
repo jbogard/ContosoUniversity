@@ -2,7 +2,13 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using System.Web.UI;
+    using HtmlTags;
+    using HtmlTags.Conventions;
     using HtmlTags.UI;
+    using HtmlTags.UI.Elements;
 
     public class DefaultAspNetMvcHtmlConventions : HtmlConventionRegistry
     {
@@ -20,8 +26,41 @@
             Labels.Always.AddClass("col-md-2");
             Labels.ModifyForAttribute<DisplayAttribute>((t, a) => t.Text(a.Name));
             Editors.BuilderPolicy<InstructorSelectElementBuilder>();
-            //Editors.Modifier<RequiredFieldModifier>();
-            //Labels.Modifier<RequiredFieldModifier>();
+            DisplayLabels.Always.BuildBy<DefaultDisplayLabelBuilder>();
+            DisplayLabels.ModifyForAttribute<DisplayAttribute>((t, a) => t.Text(a.Name));
+        }
+
+        public ElementCategoryExpression DisplayLabels
+        {
+            get { return new ElementCategoryExpression(Library.For<ElementRequest>().Category("DisplayLabels").Profile(TagConstants.Default)); }
+        }
+
+    }
+
+    public class DefaultDisplayLabelBuilder : IElementBuilder
+    {
+        public bool Matches(ElementRequest subject)
+        {
+            return true;
+        }
+
+        public HtmlTag Build(ElementRequest request)
+        {
+            return new HtmlTag("").NoTag().Text(BreakUpCamelCase(request.Accessor.Name));
+        }
+
+        public static string BreakUpCamelCase(string fieldName)
+        {
+            var patterns = new[]
+                {
+                    "([a-z])([A-Z])",
+                    "([0-9])([a-zA-Z])",
+                    "([a-zA-Z])([0-9])"
+                };
+            var output = patterns.Aggregate(fieldName,
+                (current, pattern) => Regex.Replace(current, pattern, "$1 $2", RegexOptions.IgnorePatternWhitespace));
+            return output.Replace('_', ' ');
         }
     }
+
 }
