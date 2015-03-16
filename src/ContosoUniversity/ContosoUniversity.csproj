@@ -229,6 +229,7 @@
     <Compile Include="Infrastructure\FeatureViewLocationRazorViewEngine.cs" />
     <Compile Include="Infrastructure\Mapping\MappingExtensions.cs" />
     <Compile Include="Infrastructure\Tags\DefaultAspNetMvcHtmlConventions.cs" />
+    <Compile Include="Infrastructure\Tags\DefaultDisplayLabelBuilder.cs" />
     <Compile Include="Infrastructure\Tags\InstructorSelectElementBuilder.cs" />
     <Compile Include="Infrastructure\Tags\EntitySelectElementBuilder.cs" />
     <Compile Include="Infrastructure\Tags\HtmlTagExtensions.cs" />

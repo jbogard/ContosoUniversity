@@ -41,7 +41,7 @@
             </td>
             <td>
                 @(Html.Link<UiController>(c => c.Edit(item.DepartmentID), "Edit")) |
-                @(Html.Link<UiController>(c => c.Details(item.DepartmentID), "Details")) |
+                @(Html.Link<UiController>(c => c.Details(item.DepartmentID), "Details", false)) |
                 @(Html.Link<UiController>(c => c.Delete(item.DepartmentID, null), "Delete"))
             </td>
         </tr>

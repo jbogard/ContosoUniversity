@@ -130,30 +130,38 @@
             return helper.Hidden("previousPage", url);
         }
 
-        public static HtmlTag Link<TController>(this HtmlHelper helper, Expression<Action<TController>> action, string linkText) where TController : Controller
+        public static HtmlTag Link<TController>(this HtmlHelper helper, Expression<Action<TController>> action, string linkText, bool includeReturnLink = true) where TController : Controller
         {
             var returnUrl = LinkBuilder.BuildUrlFromExpression(helper.ViewContext.RequestContext, RouteTable.Routes,
                 action);
 
-            return ReturnLink(helper, linkText, returnUrl);
+            return ReturnLink(helper, linkText, returnUrl, includeReturnLink);
         }
 
-        public static HtmlTag Link(this HtmlHelper helper, string linkText, string action, object routeValues = null)
+        private static HtmlTag ReturnLink(HtmlHelper helper, string linkText, string url, bool includeReturnLink)
         {
-            routeValues = routeValues ?? new object();
-            var routeValuesCollection = new RouteValueDictionary(routeValues);
+            if (includeReturnLink)
+            {
+                if (!url.Contains("?"))
+                    url += "?previousPage=" + helper.ViewContext.HttpContext.Request.Url.PathAndQuery;
+                else
+                    url += "&previousPage=" + helper.ViewContext.HttpContext.Request.Url.PathAndQuery;
+            }
 
-            var returnUrl = new UrlHelper(helper.ViewContext.RequestContext, helper.RouteCollection).Action(action, routeValuesCollection);
-
-            return ReturnLink(helper, linkText, returnUrl);
+            return Link(helper, linkText, url);
         }
 
-        private static HtmlTag ReturnLink(HtmlHelper helper, string linkText, string url)
+        public static HtmlTag ReturnLink(this HtmlHelper helper, string linkText)
         {
-            if (!url.Contains("?"))
-                url += "?previousPage=" + helper.ViewContext.HttpContext.Request.Url.PathAndQuery;
-            else
-                url += "&previousPage=" + helper.ViewContext.HttpContext.Request.Url.PathAndQuery;
+            var url = PreviousPageParam(helper) ?? "";
+
+            return Link(helper, linkText, url);
+        }
+
+        private static HtmlTag Link(HtmlHelper helper, string linkText, string url)
+        {
+            url = "~/" + url;
+            url = UrlHelper.GenerateContentUrl(url, helper.ViewContext.HttpContext);
 
             return new HtmlTag("a", t =>
             {

@@ -1,4 +1,5 @@
-﻿@model ContosoUniversity.Features.Department.DetailsModel
+﻿@using ContosoUniversity.Features.Department
+@model ContosoUniversity.Features.Department.DetailsModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,39 +12,39 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayLabel(model => model.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.Display(model => model.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Budget)
+            @Html.DisplayLabel(model => model.Budget)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Budget)
+            @Html.Display(model => model.Budget)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Html.DisplayLabel(model => model.StartDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StartDate)
+            @Html.Display(model => model.StartDate)
         </dd>
 
         <dt>
-            Administrator
+            @Html.DisplayLabel(model => model.AdministratorFullName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AdministratorFullName)
+            @Html.Display(model => model.AdministratorFullName)
         </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.DepartmentID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @(Html.Link<UiController>(c => c.Edit(Model.DepartmentID), "Edit")) |
+    @Html.ReturnLink("Back to List")
 </p>
