@@ -19,8 +19,7 @@
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? StartDate { get; set; }
 
-        [Display(Name = "Administrator")]
-        public Instructor Instructor { get; set; }
+        public Instructor Administrator { get; set; }
         public int DepartmentID { get; set; }
         public byte[] RowVersion { get; set; }
     }
