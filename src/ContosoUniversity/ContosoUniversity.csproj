@@ -188,7 +188,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Features\Course\UiController.cs" />
+    <Compile Include="Features\Department\EditModel.cs" />
     <Compile Include="Features\Department\CreateValidator.cs" />
+    <Compile Include="Features\Department\EditQuery.cs" />
+    <Compile Include="Features\Department\EditQueryHandler.cs" />
     <Compile Include="Features\Department\UiController.cs" />
     <Compile Include="Features\Home\UiController.cs" />
     <Compile Include="Features\Instructor\UiController.cs" />

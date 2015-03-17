@@ -8,6 +8,7 @@
     using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using AutoMapper.QueryableExtensions;
     using DAL;
     using Infrastructure;
     using MediatR;
@@ -63,7 +64,7 @@
         {
             await _mediator.SendAsync(model);
 
-            return this.RedirectToPreviousPage();
+            return this.RedirectToActionJson(c => c.Index());
         }
 
         // GET: Department/Edit/5
@@ -73,12 +74,11 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Department department = await db.Departments.FindAsync(id);
+            var department = await _mediator.SendAsync(new EditQuery {Id = id.Value});
             if (department == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.InstructorID = new SelectList(db.Instructors, "ID", "FullName", department.InstructorID);
             return View(department);
         }
 

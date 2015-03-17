@@ -2,7 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Web.UI;
+    using HtmlTags;
     using HtmlTags.Conventions;
     using HtmlTags.UI;
     using HtmlTags.UI.Elements;
@@ -18,6 +18,9 @@
                 .AddPlaceholder("MM/DD/YYYY")
                 .AddClass("datepicker")
                 .Value(m.Value<DateTime?>() != null ? m.Value<DateTime>().ToShortDateString() : string.Empty));
+            Editors.If(er => er.Accessor.Name.EndsWith("id", StringComparison.OrdinalIgnoreCase)).BuildBy(a => new HiddenTag().Value(a.StringValue()));
+            Editors.IfPropertyIs<byte[]>().BuildBy(a => new HiddenTag().Value(Convert.ToBase64String(a.Value<byte[]>())));
+
 
             Labels.Always.AddClass("control-label");
             Labels.Always.AddClass("col-md-2");

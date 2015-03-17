@@ -51,23 +51,5 @@
                 ContentType = "application/json"
             };
         }
-
-        public static ContentResult RedirectToPreviousPage(this Controller controller, string anchor)
-        {
-            string redirectUrl = controller.Request.Params["previousPage"];
-
-            if (redirectUrl != null)
-            {
-                redirectUrl = redirectUrl.Split(',').First();
-            }
-            redirectUrl += anchor;
-
-            return controller.JsonNet(new { redirect = redirectUrl });
-        }
-
-        public static ContentResult RedirectToPreviousPage(this Controller controller)
-        {
-            return RedirectToPreviousPage(controller, "");
-        }
     }
 }

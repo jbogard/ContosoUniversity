@@ -1,4 +1,5 @@
-﻿@model ContosoUniversity.Models.Department
+﻿@using ContosoUniversity.Features.Department
+@model EditModel
 
 @{
     ViewBag.Title = "Edit";
@@ -14,41 +15,14 @@
     <div class="form-horizontal">
         <h4>Department</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.DepartmentID)
-        @Html.HiddenFor(model => model.RowVersion)
+        @Html.ValidationDiv()
+        @Html.Input(model => model.DepartmentID)
+        @Html.Input(model => model.RowVersion)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Budget, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Budget, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Budget, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.InstructorID, "Administrator", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("InstructorID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.InstructorID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @Html.FormBlock(m => m.Name)
+        @Html.FormBlock(m => m.Budget)
+        @Html.FormBlock(m => m.StartDate)
+        @Html.FormBlock(m => m.Instructor)
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -59,7 +33,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @(Html.Link<UiController>(c => c.Index(), "Back to List"))
 </div>
 
 @section Scripts {

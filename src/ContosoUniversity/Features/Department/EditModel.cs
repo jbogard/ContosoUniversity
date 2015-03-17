@@ -1,0 +1,27 @@
+﻿namespace ContosoUniversity.Features.Department
+{
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using MediatR;
+    using Models;
+
+    public class EditModel : IAsyncRequest
+    {
+        [StringLength(50, MinimumLength = 3)]
+        public string Name { get; set; }
+
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal? Budget { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? StartDate { get; set; }
+
+        [Display(Name = "Administrator")]
+        public Instructor Instructor { get; set; }
+        public int DepartmentID { get; set; }
+        public byte[] RowVersion { get; set; }
+    }
+}

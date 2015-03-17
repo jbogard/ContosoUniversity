@@ -123,37 +123,10 @@
                 .AddClass("hidden");
         }
 
-        public static MvcHtmlString PreviousPageHidden(this HtmlHelper helper)
+        public static HtmlTag Link<TController>(this HtmlHelper helper, Expression<Action<TController>> action, string linkText) where TController : Controller
         {
-            var url = PreviousPageParam(helper) ?? CurrentUrl(helper);
-
-            return helper.Hidden("previousPage", url);
-        }
-
-        public static HtmlTag Link<TController>(this HtmlHelper helper, Expression<Action<TController>> action, string linkText, bool includeReturnLink = true) where TController : Controller
-        {
-            var returnUrl = LinkBuilder.BuildUrlFromExpression(helper.ViewContext.RequestContext, RouteTable.Routes,
+            var url = LinkBuilder.BuildUrlFromExpression(helper.ViewContext.RequestContext, RouteTable.Routes,
                 action);
-
-            return ReturnLink(helper, linkText, returnUrl, includeReturnLink);
-        }
-
-        private static HtmlTag ReturnLink(HtmlHelper helper, string linkText, string url, bool includeReturnLink)
-        {
-            if (includeReturnLink)
-            {
-                if (!url.Contains("?"))
-                    url += "?previousPage=" + helper.ViewContext.HttpContext.Request.Url.PathAndQuery;
-                else
-                    url += "&previousPage=" + helper.ViewContext.HttpContext.Request.Url.PathAndQuery;
-            }
-
-            return Link(helper, linkText, url);
-        }
-
-        public static HtmlTag ReturnLink(this HtmlHelper helper, string linkText)
-        {
-            var url = PreviousPageParam(helper) ?? "";
 
             return Link(helper, linkText, url);
         }
@@ -168,16 +141,6 @@
                 t.Text(linkText);
                 t.Attr("href", url);
             });
-        }
-
-        private static string CurrentUrl(HtmlHelper helper)
-        {
-            return helper.ViewContext.HttpContext.Request.Url.PathAndQuery;
-        }
-
-        private static string PreviousPageParam(HtmlHelper helper)
-        {
-            return helper.ViewContext.HttpContext.Request.Params["previousPage"];
         }
 
         private static IElementGenerator<T> GetGenerator<T>() where T : class

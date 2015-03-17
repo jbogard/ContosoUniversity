@@ -52,6 +52,11 @@
             return projectionExpression.To<TDestination>().Decompile().ToList().SingleOrDefault();
         }
 
+        public static async Task<TDestination> ToSingleOrDefaultAsync<TDestination>(this IProjectionExpression projectionExpression)
+        {
+            return await projectionExpression.To<TDestination>().DecompileAsync().SingleOrDefaultAsync();
+        }
+
         private class MapExpression<TSource> : IMapExpression<TSource>
         {
             private readonly TSource _source;

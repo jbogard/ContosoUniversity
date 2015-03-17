@@ -9,6 +9,7 @@
         {
             CreateMap<Department, IndexModel>();
             CreateMap<CreateModel, Department>(MemberList.Source);
+            CreateMap<Department, EditModel>();
         }
     }
 }

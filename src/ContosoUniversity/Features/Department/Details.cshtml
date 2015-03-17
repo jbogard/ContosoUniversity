@@ -38,7 +38,7 @@
         <dt>
             @Html.DisplayLabel(model => model.AdministratorFullName)
         </dt>
-
+        
         <dd>
             @Html.Display(model => model.AdministratorFullName)
         </dd>
@@ -46,5 +46,5 @@
 </div>
 <p>
     @(Html.Link<UiController>(c => c.Edit(Model.DepartmentID), "Edit")) |
-    @Html.ReturnLink("Back to List")
+    @(Html.Link<UiController>(c => c.Index(), "Back to List"))
 </p>
