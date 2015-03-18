@@ -1,12 +1,11 @@
-﻿@model ContosoUniversity.Models.Department
+﻿@using ContosoUniversity.Features.Department
+@model DeleteModel
 
 @{
     ViewBag.Title = "Delete";
 }
 
 <h2>Delete</h2>
-
-<p class="error">@ViewBag.ConcurrencyErrorMessage</p>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
@@ -18,31 +17,31 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Administrator.FullName)
+            @Html.Display(model => model.AdministratorFullName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayLabel(model => model.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.Display(model => model.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Budget)
+            @Html.DisplayLabel(model => model.Budget)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Budget)
+            @Html.Display(model => model.Budget)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Html.DisplayLabel(model => model.StartDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StartDate)
+            @Html.Display(model => model.StartDate)
         </dd>
 
     </dl>
@@ -50,8 +49,8 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.DepartmentID)
-        @Html.HiddenFor(model => model.RowVersion)
+        @Html.Input(model => model.DepartmentID)
+        @Html.Input(model => model.RowVersion)
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |

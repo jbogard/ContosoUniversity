@@ -9,7 +9,8 @@
         {
             CreateMap<Department, IndexModel>();
             CreateMap<CreateModel, Department>(MemberList.Source);
-            CreateMap<Department, EditModel>();
+            CreateMap<Department, EditModel>().ReverseMap();
+            CreateMap<Department, DeleteModel>();
         }
     }
 }
