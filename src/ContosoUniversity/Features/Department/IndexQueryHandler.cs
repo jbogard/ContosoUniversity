@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using AutoMapper.QueryableExtensions;
     using DAL;
     using Infrastructure.Mapping;
     using MediatR;
@@ -19,7 +18,7 @@
         public async Task<List<IndexModel>> Handle(IndexQuery message)
         {
             return await _context.Departments
-                .Project().ToListAsync<IndexModel>();
+                .ProjectToListAsync<IndexModel>();
         }
     }
 }

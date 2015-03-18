@@ -1,9 +1,7 @@
 ﻿namespace ContosoUniversity.Features.Department
 {
-    using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
-    using AutoMapper.QueryableExtensions;
     using DAL;
     using Infrastructure.Mapping;
     using MediatR;
@@ -19,7 +17,9 @@
 
         public async Task<EditModel> Handle(EditQuery message)
         {
-            var department = await _db.Departments.Where(d => d.DepartmentID == message.Id).Project().ToSingleOrDefaultAsync<EditModel>();
+            var department = await _db.Departments
+                .Where(d => d.DepartmentID == message.Id)
+                .ProjectToSingleOrDefaultAsync<EditModel>();
 
             return department;
         }

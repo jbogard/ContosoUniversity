@@ -2,9 +2,9 @@
 {
     using FluentValidation;
 
-    public class CreateValidator : AbstractValidator<CreateModel>
+    public class EditValidator : AbstractValidator<EditModel>
     {
-        public CreateValidator()
+        public EditValidator()
         {
             RuleFor(m => m.Name).NotNull().Length(3, 50);
             RuleFor(m => m.Budget).NotNull();

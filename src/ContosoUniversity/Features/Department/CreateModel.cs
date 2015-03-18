@@ -19,6 +19,6 @@
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? StartDate { get; set; }
 
-        public Instructor Instructor { get; set; }
+        public Instructor Administrator { get; set; }
     }
 }
