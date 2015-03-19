@@ -1,6 +1,5 @@
 ﻿namespace ContosoUniversity.Features.Department
 {
-    using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Infrastructure;
@@ -22,14 +21,9 @@
             return View(model);
         }
 
-        public async Task<ActionResult> Details(int? id)
+        public async Task<ActionResult> Details(DetailsQuery query)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var department = await _mediator.SendAsync(new DetailsQuery {Id = id.Value});
+            var department = await _mediator.SendAsync(query);
 
             if (department == null)
             {
@@ -52,13 +46,10 @@
             return this.RedirectToActionJson(c => c.Index());
         }
 
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit(EditQuery query)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var department = await _mediator.SendAsync(new EditQuery {Id = id.Value});
+            var department = await _mediator.SendAsync(query);
+
             if (department == null)
             {
                 return HttpNotFound();
@@ -75,9 +66,9 @@
             return this.RedirectToActionJson(c => c.Index());
         }
 
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(DeleteQuery query)
         {
-            var model = await _mediator.SendAsync(new DeleteQuery {Id = id});
+            var model = await _mediator.SendAsync(query);
 
             return View(model);
         }

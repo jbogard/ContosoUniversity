@@ -45,6 +45,6 @@
     </dl>
 </div>
 <p>
-    @(Html.Link<UiController>(c => c.Edit(Model.DepartmentID), "Edit")) |
+    @(Html.Link<UiController>(c => c.Edit(new EditQuery {Id = Model.DepartmentID}), "Edit")) |
     @(Html.Link<UiController>(c => c.Index(), "Back to List"))
 </p>

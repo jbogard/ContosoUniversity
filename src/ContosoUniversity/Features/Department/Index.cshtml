@@ -40,9 +40,9 @@
                 @Html.Display(modelItem => modelItem[i].AdministratorFullName)
             </td>
             <td>
-                @(Html.Link<UiController>(c => c.Edit(item.DepartmentID), "Edit")) |
-                @(Html.Link<UiController>(c => c.Details(item.DepartmentID), "Details")) |
-                @(Html.Link<UiController>(c => c.Delete(item.DepartmentID), "Delete"))
+                @(Html.Link<UiController>(c => c.Edit(new EditQuery { Id = item.DepartmentID }), "Edit")) |
+                @(Html.Link<UiController>(c => c.Details(new DetailsQuery { Id = item.DepartmentID }), "Details")) |
+                @(Html.Link<UiController>(c => c.Delete(new DeleteQuery { Id = item.DepartmentID }), "Delete"))
             </td>
         </tr>
         i++;
