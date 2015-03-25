@@ -3,7 +3,8 @@
     using System.Linq;
     using System.Text.RegularExpressions;
     using HtmlTags;
-    using HtmlTags.UI.Elements;
+    using HtmlTags.Conventions;
+    using HtmlTags.Conventions.Elements;
 
     public class DefaultDisplayLabelBuilder : IElementBuilder
     {

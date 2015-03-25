@@ -4,8 +4,6 @@
     using System.ComponentModel.DataAnnotations;
     using HtmlTags;
     using HtmlTags.Conventions;
-    using HtmlTags.UI;
-    using HtmlTags.UI.Elements;
 
     public class DefaultAspNetMvcHtmlConventions : HtmlConventionRegistry
     {
@@ -34,7 +32,7 @@
 
         public ElementCategoryExpression DisplayLabels
         {
-            get { return new ElementCategoryExpression(Library.For<ElementRequest>().Category("DisplayLabels").Profile(TagConstants.Default)); }
+            get { return new ElementCategoryExpression(Library.TagLibrary.Category("DisplayLabels").Profile(TagConstants.Default)); }
         }
 
     }

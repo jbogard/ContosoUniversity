@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Linq.Expressions;
     using System.Web.Mvc;
     using System.Web.Mvc.Html;
@@ -10,50 +9,50 @@
     using App_Start;
     using HtmlTags;
     using HtmlTags.Conventions;
+    using HtmlTags.Conventions.Elements;
     using HtmlTags.Reflection;
-    using HtmlTags.UI.Elements;
-    using Microsoft.Web.Mvc;
 
     public static class HtmlHelperExtensions
     {
         public static HtmlTag Input<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression)
             where T : class
         {
-            var generator = GetGenerator<T>();
-            return generator.InputFor(expression, model: helper.ViewData.Model);
+            var generator = GetGenerator(helper.ViewData.Model);
+            return generator.InputFor(expression);
         }
 
         public static HtmlTag Label<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression)
             where T : class
         {
-            var generator = GetGenerator<T>();
-            return generator.LabelFor(expression, model: helper.ViewData.Model);
+            var generator = GetGenerator(helper.ViewData.Model);
+            return generator.LabelFor(expression);
         }
 
         public static HtmlTag Display<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression)
             where T : class
         {
-            var generator = GetGenerator<T>();
-            return generator.DisplayFor(expression, model: helper.ViewData.Model);
+            var generator = GetGenerator(helper.ViewData.Model);
+            return generator.DisplayFor(expression);
         }
 
         public static HtmlTag DisplayLabel<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression)
             where T : class
         {
-            return DisplayLabelImpl(expression);
+            var generator = GetGenerator(helper.ViewData.Model);
+            return generator.TagFor(expression, "DisplayLabels");
         }
 
         public static HtmlTag DisplayLabel<T>(this HtmlHelper<IList<T>> helper, Expression<Func<T, object>> expression)
             where T : class
         {
-            return DisplayLabelImpl(expression);
+            var generator = GetGenerator(default(T));
+            return generator.TagFor(expression, "DisplayLabels");
         }
 
         private static HtmlTag DisplayLabelImpl<T>(Expression<Func<T, object>> expression) where T : class
         {
-            var tagGeneratorFactory =
-                StructuremapMvc.StructureMapDependencyScope.CurrentNestedContainer.GetInstance<ITagGeneratorFactory>();
-            var tagGenerator = tagGeneratorFactory.GeneratorFor<ElementRequest>();
+            var library = StructuremapMvc.StructureMapDependencyScope.CurrentNestedContainer.GetInstance<HtmlConventionLibrary>();
+            var tagGenerator = new TagGenerator(library.TagLibrary, new ActiveProfile(), t => StructuremapMvc.StructureMapDependencyScope.CurrentNestedContainer.GetInstance(t));
             var request = new ElementRequest(expression.ToAccessor())
             {
                 Model = default(T)
@@ -143,10 +142,11 @@
             });
         }
 
-        private static IElementGenerator<T> GetGenerator<T>() where T : class
+        private static IElementGenerator<T> GetGenerator<T>(T model) where T : class
         {
-            return
-                StructuremapMvc.StructureMapDependencyScope.CurrentNestedContainer.GetInstance<IElementGenerator<T>>();
+            var library =
+                StructuremapMvc.StructureMapDependencyScope.CurrentNestedContainer.GetInstance<HtmlConventionLibrary>();
+            return ElementGenerator<T>.For(library, t => StructuremapMvc.StructureMapDependencyScope.CurrentNestedContainer.GetInstance(t), model);
         }
     }
 }

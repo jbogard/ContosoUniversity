@@ -172,40 +172,63 @@
             Setting this value will remove any existing value. Use <see cref="M:HtmlTags.HtmlTag.After(HtmlTags.HtmlTag)"/> if you wish to insert a new sibling before any existing sibling.
             </summary>
         </member>
-        <member name="M:HtmlTags.Conventions.TagLibrary`1.Category(System.String)">
+        <member name="M:HtmlTags.Conventions.Formatting.DisplayFormatterExtensions.FormatValue(HtmlTags.Conventions.Formatting.IDisplayFormatter,System.Type,HtmlTags.Reflection.Accessor,System.Object,System.String)">
+            <summary>
+            Formats the provided value using the accessor accessor metadata and a custom format
+            </summary>
+            <param name="formatter">The formatter</param>
+            <param name="modelType">The type of the model to which the accessor belongs (i.e. Case where the accessor might be on its base class WorkflowItem)</param>
+            <param name="accessor">The property that holds the given value</param>
+            <param name="value">The data to format</param>
+            <param name="format">The custom format specifier</param>
+        </member>
+        <member name="M:HtmlTags.Conventions.Formatting.DisplayFormatterExtensions.FormatValue(HtmlTags.Conventions.Formatting.IDisplayFormatter,System.Type,HtmlTags.Reflection.Accessor,System.Object)">
+            <summary>
+            Formats the provided value using the property accessor metadata
+            </summary>
+            <param name="modelType">The type of the model to which the property belongs (i.e. Case where the property might be on its base class WorkflowItem)</param>
+            <param name="formatter">The formatter</param>
+            <param name="property">The property that holds the given value</param>
+            <param name="value">The data to format</param>
+        </member>
+        <member name="M:HtmlTags.Conventions.Formatting.DisplayFormatterExtensions.FormatProperty(HtmlTags.Conventions.Formatting.IDisplayFormatter,System.Type,HtmlTags.Reflection.Accessor,System.Object)">
+            <summary>
+            Retrieves the formatted value of a property from an instance
+            </summary>
+            <param name="formatter">The formatter</param>
+            <param name="modelType">The type of the model to which the property belongs (i.e. Case where the property might be on its base class WorkflowItem)</param>
+            <param name="property">The property of <paramref name="entity"/> whose value should be formatted</param>
+            <param name="entity">The instance containing the data to format</param>
+        </member>
+        <member name="M:HtmlTags.Conventions.TagLibrary.Category(System.String)">
             <summary>
             The modifiers and builders for a category of conventions 
             </summary>
             <param name="category">Example:  "Label", "Editor", "Display"</param>
             <returns></returns>
         </member>
-        <member name="M:HtmlTags.Conventions.TagLibrary`1.Add(HtmlTags.Conventions.ITagBuilderPolicy{`0})">
+        <member name="M:HtmlTags.Conventions.TagLibrary.Add(HtmlTags.Conventions.ITagBuilderPolicy)">
             <summary>
             Adds a builder policy to the default category and profile
             </summary>
             <param name="policy"> </param>
         </member>
-        <member name="M:HtmlTags.Conventions.TagLibrary`1.Add(HtmlTags.Conventions.ITagModifier{`0})">
+        <member name="M:HtmlTags.Conventions.TagLibrary.Add(HtmlTags.Conventions.ITagModifier)">
             <summary>
             Adds a modifier to the default category and profile
             </summary>
             <param name="modifier"></param>
         </member>
-        <member name="M:HtmlTags.Conventions.TagLibrary`1.ForProfile(System.String)">
+        <member name="M:HtmlTags.Conventions.TagLibrary.ForProfile(System.String)">
             <summary>
             Add builders and modifiers by profile
             </summary>
             <param name="profile"></param>
             <returns></returns>
         </member>
-        <member name="P:HtmlTags.Conventions.TagLibrary`1.Default">
+        <member name="P:HtmlTags.Conventions.TagLibrary.Default">
             <summary>
             Access to the default category
-            </summary>
-        </member>
-        <member name="T:HtmlTags.Conventions.TagRequest">
-            <summary>
-            Will always need to implement an Equals and GetHashCode in order for this thing to work
             </summary>
         </member>
         <member name="M:HtmlTags.JsonUtil.ToUnsafeJson(System.Object)">
@@ -244,42 +267,6 @@
                 Concatenated names of all the properties in the chain.
                 Case.Site.Name == "CaseSiteName"
             </summary>
-        </member>
-        <member name="M:HtmlTags.UI.Elements.ElementGenerator`1.For(HtmlTags.Conventions.HtmlConventionLibrary,System.Collections.Generic.IEnumerable{HtmlTags.Conventions.ITagRequestActivator})">
-            <summary>
-            Probably only useful for testing
-            </summary>
-            <param name="library"></param>
-            <param name="activators"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HtmlTags.UI.Formatting.DisplayFormatterExtensions.FormatValue(HtmlTags.UI.Formatting.IDisplayFormatter,System.Type,HtmlTags.Reflection.Accessor,System.Object,System.String)">
-            <summary>
-            Formats the provided value using the accessor accessor metadata and a custom format
-            </summary>
-            <param name="formatter">The formatter</param>
-            <param name="modelType">The type of the model to which the accessor belongs (i.e. Case where the accessor might be on its base class WorkflowItem)</param>
-            <param name="accessor">The property that holds the given value</param>
-            <param name="value">The data to format</param>
-            <param name="format">The custom format specifier</param>
-        </member>
-        <member name="M:HtmlTags.UI.Formatting.DisplayFormatterExtensions.FormatValue(HtmlTags.UI.Formatting.IDisplayFormatter,System.Type,HtmlTags.Reflection.Accessor,System.Object)">
-            <summary>
-            Formats the provided value using the property accessor metadata
-            </summary>
-            <param name="modelType">The type of the model to which the property belongs (i.e. Case where the property might be on its base class WorkflowItem)</param>
-            <param name="formatter">The formatter</param>
-            <param name="property">The property that holds the given value</param>
-            <param name="value">The data to format</param>
-        </member>
-        <member name="M:HtmlTags.UI.Formatting.DisplayFormatterExtensions.FormatProperty(HtmlTags.UI.Formatting.IDisplayFormatter,System.Type,HtmlTags.Reflection.Accessor,System.Object)">
-            <summary>
-            Retrieves the formatted value of a property from an instance
-            </summary>
-            <param name="formatter">The formatter</param>
-            <param name="modelType">The type of the model to which the property belongs (i.e. Case where the property might be on its base class WorkflowItem)</param>
-            <param name="property">The property of <paramref name="entity"/> whose value should be formatted</param>
-            <param name="entity">The instance containing the data to format</param>
         </member>
     </members>
 </doc>
