@@ -1,5 +1,5 @@
 ﻿@using ContosoUniversity.Features.Department
-@model ContosoUniversity.Features.Department.DetailsModel
+@model Details.Model
 
 @{
     ViewBag.Title = "Details";
@@ -45,6 +45,6 @@
     </dl>
 </div>
 <p>
-    @(Html.Link<UiController>(c => c.Edit(new EditQuery {Id = Model.DepartmentID}), "Edit")) |
+    @(Html.Link<UiController>(c => c.Edit(new Edit.Query {Id = Model.DepartmentID}), "Edit")) |
     @(Html.Link<UiController>(c => c.Index(), "Back to List"))
 </p>

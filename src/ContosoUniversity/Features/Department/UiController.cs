@@ -16,12 +16,12 @@
 
         public async Task<ActionResult> Index()
         {
-            var model = await _mediator.SendAsync(new IndexQuery());
+            var model = await _mediator.SendAsync(new Index.Query());
 
             return View(model);
         }
 
-        public async Task<ActionResult> Details(DetailsQuery query)
+        public async Task<ActionResult> Details(Details.Query query)
         {
             var department = await _mediator.SendAsync(query);
 
@@ -34,19 +34,19 @@
 
         public ActionResult Create()
         {
-            return View(new CreateModel());
+            return View(new Create.Command());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(CreateModel model)
+        public async Task<ActionResult> Create(Create.Command model)
         {
             await _mediator.SendAsync(model);
 
             return this.RedirectToActionJson(c => c.Index());
         }
 
-        public async Task<ActionResult> Edit(EditQuery query)
+        public async Task<ActionResult> Edit(Edit.Query query)
         {
             var department = await _mediator.SendAsync(query);
 
@@ -59,14 +59,14 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(EditModel model)
+        public async Task<ActionResult> Edit(Edit.Command model)
         {
             await _mediator.SendAsync(model);
 
             return this.RedirectToActionJson(c => c.Index());
         }
 
-        public async Task<ActionResult> Delete(DeleteQuery query)
+        public async Task<ActionResult> Delete(Delete.Query query)
         {
             var model = await _mediator.SendAsync(query);
 
@@ -75,9 +75,9 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(DeleteModel model)
+        public async Task<ActionResult> Delete(Delete.Command command)
         {
-            await _mediator.SendAsync(model);
+            await _mediator.SendAsync(command);
 
             return this.RedirectToActionJson(c => c.Index());
         }

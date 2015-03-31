@@ -1,5 +1,5 @@
 ﻿@using ContosoUniversity.Features.Department
-@model IList<IndexModel>
+@model IList<Index.Model>
 @{
     ViewBag.Title = "Departments";
 }
@@ -40,9 +40,9 @@
                 @Html.Display(modelItem => modelItem[i].AdministratorFullName)
             </td>
             <td>
-                @(Html.Link<UiController>(c => c.Edit(new EditQuery { Id = item.DepartmentID }), "Edit")) |
-                @(Html.Link<UiController>(c => c.Details(new DetailsQuery { Id = item.DepartmentID }), "Details")) |
-                @(Html.Link<UiController>(c => c.Delete(new DeleteQuery { Id = item.DepartmentID }), "Delete"))
+                @(Html.Link<UiController>(c => c.Edit(new Edit.Query { Id = item.DepartmentID }), "Edit")) |
+                @(Html.Link<UiController>(c => c.Details(new Details.Query { Id = item.DepartmentID }), "Details")) |
+                @(Html.Link<UiController>(c => c.Delete(new Delete.Query { Id = item.DepartmentID }), "Delete"))
             </td>
         </tr>
         i++;
