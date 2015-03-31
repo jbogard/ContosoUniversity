@@ -10,7 +10,6 @@
     using HtmlTags;
     using HtmlTags.Conventions;
     using HtmlTags.Conventions.Elements;
-    using HtmlTags.Reflection;
 
     public static class HtmlHelperExtensions
     {
@@ -47,20 +46,6 @@
         {
             var generator = GetGenerator(default(T));
             return generator.TagFor(expression, "DisplayLabels");
-        }
-
-        private static HtmlTag DisplayLabelImpl<T>(Expression<Func<T, object>> expression) where T : class
-        {
-            var library = StructuremapMvc.StructureMapDependencyScope.CurrentNestedContainer.GetInstance<HtmlConventionLibrary>();
-            var tagGenerator = new TagGenerator(library.TagLibrary, new ActiveProfile(), t => StructuremapMvc.StructureMapDependencyScope.CurrentNestedContainer.GetInstance(t));
-            var request = new ElementRequest(expression.ToAccessor())
-            {
-                Model = default(T)
-            };
-
-            var tag = tagGenerator.Build(request, "DisplayLabels");
-
-            return tag;
         }
 
         public static MvcHtmlString DisplayNameFor<TModel, TValue>(this HtmlHelper<IList<TModel>> html,
