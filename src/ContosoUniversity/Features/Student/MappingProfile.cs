@@ -8,6 +8,8 @@
         protected override void Configure()
         {
             CreateMap<Student, Index.Model>();
+            CreateMap<Student, Details.Model>();
+            CreateMap<Enrollment, Details.Model.Enrollment>();
         }
     }
 }

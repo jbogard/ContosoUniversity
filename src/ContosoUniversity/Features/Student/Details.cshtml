@@ -1,4 +1,5 @@
-﻿@model ContosoUniversity.Models.Student
+﻿@using ContosoUniversity.Features.Student
+@model Details.Model
 
 @{
     ViewBag.Title = "Details";
@@ -11,30 +12,30 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayLabel(model => model.LastName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            @Html.Display(model => model.LastName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FirstMidName)
+            @Html.DisplayLabel(model => model.FirstMidName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FirstMidName)
+            @Html.Display(model => model.FirstMidName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EnrollmentDate)
+            @Html.DisplayLabel(model => model.EnrollmentDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EnrollmentDate)
+            @Html.Display(model => model.EnrollmentDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Enrollments)
+            @Html.DisplayLabel(model => model.Enrollments)
         </dt>
         <dd>
             <table class="table">
@@ -42,14 +43,14 @@
                     <th>Course Title</th>
                     <th>Grade</th>
                 </tr>
-                @foreach (var item in Model.Enrollments)
+                @for (var i = 0; i < Model.Enrollments.Count; i++)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Course.Title)
+                            @Html.Display(m => m.Enrollments[i].CourseTitle)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Grade)
+                            @Html.Display(m => m.Enrollments[i].Grade)
                         </td>
                     </tr>
                 }
@@ -58,6 +59,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @(Html.Link<UiController>(c => c.Edit(Model.ID))) |
+    @(Html.Link<UiController>(c => c.Index(null), "Back to List"))
 </p>

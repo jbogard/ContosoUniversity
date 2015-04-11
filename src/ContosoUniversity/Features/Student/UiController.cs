@@ -5,6 +5,7 @@
     using System.Data.Entity.Infrastructure;
     using System.Linq;
     using System.Net;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Course;
     using DAL;
@@ -32,18 +33,11 @@
 
 
         // GET: Student/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(Details.Query query)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Student student = db.Students.Find(id);
-            if (student == null)
-            {
-                return HttpNotFound();
-            }
-            return View(student);
+            var model = await _mediator.SendAsync(query);
+
+            return View(model);
         }
 
         // GET: Student/Create
