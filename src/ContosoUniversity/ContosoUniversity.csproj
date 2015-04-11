@@ -197,6 +197,7 @@
     <Compile Include="Features\Department\UiController.cs" />
     <Compile Include="Features\Home\UiController.cs" />
     <Compile Include="Features\Instructor\UiController.cs" />
+    <Compile Include="Features\Student\MappingProfile.cs" />
     <Compile Include="Features\Student\UiController.cs" />
     <Compile Include="DAL\SchoolConfiguration.cs" />
     <Compile Include="DAL\SchoolContext.cs" />

@@ -1,15 +1,17 @@
 ﻿namespace ContosoUniversity.Features.Student
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using DAL;
+    using Infrastructure.Mapping;
     using MediatR;
     using Models;
     using PagedList;
 
     public class Index
     {
-        public class Query : IRequest<Model>
+        public class Query : IRequest<Result>
         {
             public string SortOrder { get; set; }
             public string CurrentFilter { get; set; }
@@ -17,17 +19,27 @@
             public int? Page { get; set; }
         }
 
-        public class Model
+        public class Result
         {
             public string CurrentSort { get; set; }
             public string NameSortParm { get; set; }
             public string DateSortParm { get; set; }
             public string CurrentFilter { get; set; }
             public string SearchString { get; set; }
-            public IPagedList<Student> Results { get; set; }
+
+            public IPagedList<Model> Results { get; set; }
         }
 
-        public class QueryHandler : IRequestHandler<Query, Model>
+        public class Model
+        {
+            public int ID { get; set; }
+            [Display(Name = "First Name")]
+            public string FirstMidName { get; set; }
+            public string LastName { get; set; }
+            public DateTime EnrollmentDate { get; set; }
+        }
+
+        public class QueryHandler : IRequestHandler<Query, Result>
         {
             private readonly SchoolContext _db;
 
@@ -36,9 +48,9 @@
                 _db = db;
             }
 
-            public Model Handle(Query message)
+            public Result Handle(Query message)
             {
-                var model = new Model
+                var model = new Result
                 {
                     CurrentSort = message.SortOrder,
                     NameSortParm = String.IsNullOrEmpty(message.SortOrder) ? "name_desc" : "",
@@ -82,7 +94,7 @@
 
                 int pageSize = 3;
                 int pageNumber = (message.Page ?? 1);
-                model.Results = students.ToPagedList(pageNumber, pageSize);
+                model.Results = students.ProjectToPagedList<Model>(pageNumber, pageSize);
 
                 return model;
             }
