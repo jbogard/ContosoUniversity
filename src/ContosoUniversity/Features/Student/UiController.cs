@@ -6,58 +6,28 @@
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
+    using Course;
     using DAL;
+    using MediatR;
     using PagedList;
     using Models;
 
     public class UiController : Controller
     {
+        private readonly IMediator _mediator;
         private SchoolContext db = new SchoolContext();
 
-        // GET: Student
-        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public UiController(IMediator mediator)
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            _mediator = mediator;
+        }
 
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
+        // GET: Student
+        public ViewResult Index(Index.Query query)
+        {
+            var model = _mediator.Send(query);
 
-            ViewBag.CurrentFilter = searchString;
-
-            var students = from s in db.Students
-                select s;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                students = students.Where(s => s.LastName.Contains(searchString)
-                                               || s.FirstMidName.Contains(searchString));
-            }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    students = students.OrderByDescending(s => s.LastName);
-                    break;
-                case "Date":
-                    students = students.OrderBy(s => s.EnrollmentDate);
-                    break;
-                case "date_desc":
-                    students = students.OrderByDescending(s => s.EnrollmentDate);
-                    break;
-                default: // Name ascending 
-                    students = students.OrderBy(s => s.LastName);
-                    break;
-            }
-
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            return View(students.ToPagedList(pageNumber, pageSize));
+            return View(model);
         }
 
 

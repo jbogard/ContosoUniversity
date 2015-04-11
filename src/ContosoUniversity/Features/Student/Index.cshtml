@@ -1,4 +1,5 @@
-﻿@model PagedList.IPagedList<ContosoUniversity.Models.Student>
+﻿@model Index.Model
+@using ContosoUniversity.Features.Student;
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
@@ -9,53 +10,53 @@
 <h2>Students</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @(Html.Link<UiController>(c => c.Create(), "Create New"))
 </p>
-@using (Html.BeginForm("Index", "Student", FormMethod.Get))
-{
+<form method="GET">
     <p>
-        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        Find by name: @Html.Input(m => m.SearchString)
         <input type="submit" value="Search" />
     </p>
-}
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            First Name
-        </th>
-        <th>
-            @Html.ActionLink("Enrollment Date", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th></th>
-    </tr>
-
-
-    @foreach (var item in Model)
-    {
+</form>
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstMidName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EnrollmentDate)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
+            <th>
+                @(Html.Link<UiController>(c => c.Index(new Index.Query { SortOrder = Model.NameSortParm, CurrentFilter = Model.CurrentFilter }), "Last Name"))
+            </th>
+            <th>
+                First Name
+            </th>
+            <th>
+                @(Html.Link<UiController>(c => c.Index(new Index.Query { SortOrder = Model.DateSortParm, CurrentFilter = Model.CurrentFilter }), "Enrollment Date"))
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
-<br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        @{ int i = 0; }
+        @foreach (var item in Model.Results)
+        {
+            <tr>
+                <td>
+                    @Html.Display(modelItem => modelItem.Results[i].LastName)
+                </td>
+                <td>
+                    @Html.Display(modelItem => modelItem.Results[i].FirstMidName)
+                </td>
+                <td>
+                    @Html.Display(modelItem => modelItem.Results[i].EnrollmentDate)
+                </td>
+                <td>
+                    @(Html.Link<UiController>(c => c.Edit(item.ID))) |
+                    @(Html.Link<UiController>(c => c.Details(item.ID))) |
+                    @(Html.Link<UiController>(c => c.Delete(item.ID)))
+                </td>
+            </tr>
+            i++;
+        }
+
+    </table>
+    <br />
+    Page @(Model.Results.PageCount < Model.Results.PageNumber ? 0 : Model.Results.PageNumber) of @Model.Results.PageCount
+
+    @(Html.PagedListPager(Model.Results, page => Url.Action<UiController>(c => c.Index(new Index.Query { Page = page, SortOrder = Model.CurrentSort, CurrentFilter = Model.CurrentFilter }))))

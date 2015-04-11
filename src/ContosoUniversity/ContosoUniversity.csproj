@@ -190,6 +190,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
+    <Compile Include="Features\Student\Index.cs" />
     <Compile Include="Features\Course\UiController.cs" />
     <Compile Include="Features\Department\Delete.cs" />
     <Compile Include="Features\Department\Edit.cs" />

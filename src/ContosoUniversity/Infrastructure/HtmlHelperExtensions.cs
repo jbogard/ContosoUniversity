@@ -7,6 +7,7 @@
     using System.Web.Mvc.Html;
     using System.Web.Routing;
     using App_Start;
+    using FluentValidation.Internal;
     using HtmlTags;
     using HtmlTags.Conventions;
     using HtmlTags.Conventions.Elements;
@@ -105,6 +106,13 @@
                 .AddClass("alert")
                 .AddClass("alert-danger")
                 .AddClass("hidden");
+        }
+
+        public static HtmlTag Link<TController>(this HtmlHelper helper, Expression<Action<TController>> action) where TController : Controller
+        {
+            var linkText = ((MethodCallExpression)action.Body).Method.Name;
+
+            return helper.Link(action, linkText);
         }
 
         public static HtmlTag Link<TController>(this HtmlHelper helper, Expression<Action<TController>> action, string linkText) where TController : Controller
