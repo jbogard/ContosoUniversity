@@ -23,7 +23,7 @@
             }
         }
 
-        public class Command : IAsyncRequest
+        public class Command : IRequest
         {
             [StringLength(50, MinimumLength = 3)]
             public string Name { get; set; }
@@ -39,7 +39,7 @@
             public Instructor Administrator { get; set; }
         }
 
-        public class CommandHandler : AsyncRequestHandler<Command>
+        public class CommandHandler : RequestHandler<Command>
         {
             private readonly SchoolContext _context;
 
@@ -48,7 +48,7 @@
                 _context = context;
             }
 
-            protected override async Task HandleCore(Command message)
+            protected override void HandleCore(Command message)
             {
                 var department = Mapper.Map<Command, Department>(message);
 

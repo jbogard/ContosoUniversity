@@ -39,9 +39,9 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Create.Command model)
+        public ActionResult Create(Create.Command model)
         {
-            await _mediator.SendAsync(model);
+            _mediator.Send(model);
 
             return this.RedirectToActionJson(c => c.Index());
         }

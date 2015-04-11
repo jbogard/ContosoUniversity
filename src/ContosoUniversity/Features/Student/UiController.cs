@@ -1,16 +1,13 @@
 ﻿namespace ContosoUniversity.Features.Student
 {
-    using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Course;
     using DAL;
+    using Infrastructure;
     using MediatR;
-    using PagedList;
     using Models;
 
     public class UiController : Controller
@@ -43,7 +40,7 @@
         // GET: Student/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new Create.Command());
         }
 
         // POST: Student/Create
@@ -51,72 +48,32 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LastName, FirstMidName, EnrollmentDate")] Student student)
+        public ActionResult Create(Create.Command command)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    db.Students.Add(student);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-            }
-            catch (RetryLimitExceededException /* dex */)
-            {
-                //Log the error (uncomment dex variable name and add a line here to write a log.
-                ModelState.AddModelError("",
-                    "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-            }
-            return View(student);
+            _mediator.Send(command);
+
+            return this.RedirectToActionJson(c => c.Index(null));
         }
 
 
         // GET: Student/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(Edit.Query query)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Student student = db.Students.Find(id);
-            if (student == null)
-            {
-                return HttpNotFound();
-            }
-            return View(student);
+            var model = await _mediator.SendAsync(query);
+
+            return View(model);
         }
 
         // POST: Student/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Edit")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost(int? id)
+        public async Task<ActionResult> Edit(Edit.Command command)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var studentToUpdate = db.Students.Find(id);
-            if (TryUpdateModel(studentToUpdate, "",
-                new[] {"LastName", "FirstMidName", "EnrollmentDate"}))
-            {
-                try
-                {
-                    db.Entry(studentToUpdate).State = EntityState.Modified;
-                    db.SaveChanges();
+            await _mediator.SendAsync(command);
 
-                    return RedirectToAction("Index");
-                }
-                catch (RetryLimitExceededException /* dex */)
-                {
-                    //Log the error (uncomment dex variable name and add a line here to write a log.
-                    ModelState.AddModelError("",
-                        "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-                }
-            }
-            return View(studentToUpdate);
+            return this.RedirectToActionJson(c => c.Index(null));
         }
 
         // GET: Student/Delete/5

@@ -14,7 +14,7 @@
 </p>
 <form method="GET">
     <p>
-        Find by name: @Html.Input(m => m.SearchString)
+        Find by name: @Html.Input(m => m.SearchString).RemoveClass("form-control")
         <input type="submit" value="Search" />
     </p>
 </form>
@@ -47,8 +47,8 @@
                     @Html.Display(modelItem => modelItem.Results[i].EnrollmentDate)
                 </td>
                 <td>
-                    @(Html.Link<UiController>(c => c.Edit(item.ID))) |
-                    @(Html.Link<UiController>(c => c.Details(item.ID))) |
+                    @(Html.Link<UiController>(c => c.Edit(new Edit.Query {Id = item.ID}))) |
+                    @(Html.Link<UiController>(c => c.Details(new Details.Query {Id = item.ID }))) |
                     @(Html.Link<UiController>(c => c.Delete(item.ID)))
                 </td>
             </tr>
