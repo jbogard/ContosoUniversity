@@ -49,7 +49,7 @@
                 <td>
                     @(Html.Link<UiController>(c => c.Edit(new Edit.Query {Id = item.ID}))) |
                     @(Html.Link<UiController>(c => c.Details(new Details.Query {Id = item.ID }))) |
-                    @(Html.Link<UiController>(c => c.Delete(item.ID)))
+                    @(Html.Link<UiController>(c => c.Delete(new Delete.Query { Id = item.ID })))
                 </td>
             </tr>
             i++;

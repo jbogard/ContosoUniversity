@@ -191,6 +191,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Features\Student\Create.cs" />
+    <Compile Include="Features\Student\Delete.cs" />
     <Compile Include="Features\Student\Details.cs" />
     <Compile Include="Features\Student\Edit.cs" />
     <Compile Include="Features\Student\Index.cs" />

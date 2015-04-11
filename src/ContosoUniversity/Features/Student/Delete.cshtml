@@ -1,4 +1,5 @@
-﻿@model ContosoUniversity.Models.Student
+﻿@using ContosoUniversity.Features.Student
+@model Delete.Command
 
 @{
     ViewBag.Title = "Delete";
@@ -12,15 +13,15 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayLabel(model => model.LastName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            @Html.Display(model => model.LastName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FirstMidName)
+            @Html.Display(model => model.FirstMidName)
         </dt>
 
         <dd>
@@ -28,7 +29,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EnrollmentDate)
+            @Html.Display(model => model.EnrollmentDate)
         </dt>
 
         <dd>
@@ -39,10 +40,11 @@
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
+        @Html.Input(model => model.ID)
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @(Html.Link<UiController>(c => c.Index(null), "Back to List"))
         </div>
     }
 </div>
