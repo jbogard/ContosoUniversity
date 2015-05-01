@@ -7,6 +7,8 @@
     using AutoMapper.QueryableExtensions;
     using DelegateDecompiler;
     using DelegateDecompiler.EntityFramework;
+    using EntityFramework.Extensions;
+    using EntityFramework.Future;
     using PagedList;
 
     public static class MapperExtensions

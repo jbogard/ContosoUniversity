@@ -1,4 +1,4 @@
-﻿@model ContosoUniversity.Models.Instructor
+﻿@model ContosoUniversity.Features.Instructor.Delete.Command
 
 @{
     ViewBag.Title = "Delete";
@@ -12,42 +12,42 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.OfficeAssignment.Location)
+            @Html.DisplayLabel(model => model.OfficeAssignmentLocation)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OfficeAssignment.Location)
+            @Html.Display(model => model.OfficeAssignmentLocation)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayLabel(model => model.LastName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            @Html.Display(model => model.LastName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FirstMidName)
+            @Html.DisplayLabel(model => model.FirstMidName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FirstMidName)
+            @Html.Display(model => model.FirstMidName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.HireDate)
+            @Html.DisplayLabel(model => model.HireDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HireDate)
+            @Html.Display(model => model.HireDate)
         </dd>
 
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
-
+        @Html.Input(m => m.ID)
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index")

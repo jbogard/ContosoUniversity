@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using System.Threading.Tasks;
     using DAL;
     using Infrastructure.Mapping;
@@ -40,7 +41,7 @@
             public async Task<List<Model>> Handle(Query message)
             {
                 return await _context.Departments
-                    .ProjectToListAsync<Model>();
+                  .ProjectToListAsync<Model>();
             }
         }
     }

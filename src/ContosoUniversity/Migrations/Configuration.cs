@@ -79,31 +79,31 @@ namespace ContosoUniversity.Migrations
             {
                 new Course {CourseID = 1050, Title = "Chemistry",      Credits = 3,
                   DepartmentID = departments.Single( s => s.Name == "Engineering").DepartmentID,
-                  Instructors = new List<Instructor>() 
+                  CourseInstructors = new List<CourseInstructor>() 
                 },
                 new Course {CourseID = 4022, Title = "Microeconomics", Credits = 3,
                   DepartmentID = departments.Single( s => s.Name == "Economics").DepartmentID,
-                  Instructors = new List<Instructor>() 
+                  CourseInstructors = new List<CourseInstructor>() 
                 },
                 new Course {CourseID = 4041, Title = "Macroeconomics", Credits = 3,
                   DepartmentID = departments.Single( s => s.Name == "Economics").DepartmentID,
-                  Instructors = new List<Instructor>() 
+                  CourseInstructors = new List<CourseInstructor>() 
                 },
                 new Course {CourseID = 1045, Title = "Calculus",       Credits = 4,
                   DepartmentID = departments.Single( s => s.Name == "Mathematics").DepartmentID,
-                  Instructors = new List<Instructor>() 
+                  CourseInstructors = new List<CourseInstructor>() 
                 },
                 new Course {CourseID = 3141, Title = "Trigonometry",   Credits = 4,
                   DepartmentID = departments.Single( s => s.Name == "Mathematics").DepartmentID,
-                  Instructors = new List<Instructor>() 
+                  CourseInstructors = new List<CourseInstructor>() 
                 },
                 new Course {CourseID = 2021, Title = "Composition",    Credits = 3,
                   DepartmentID = departments.Single( s => s.Name == "English").DepartmentID,
-                  Instructors = new List<Instructor>() 
+                  CourseInstructors = new List<CourseInstructor>() 
                 },
                 new Course {CourseID = 2042, Title = "Literature",     Credits = 4,
                   DepartmentID = departments.Single( s => s.Name == "English").DepartmentID,
-                  Instructors = new List<Instructor>() 
+                  CourseInstructors = new List<CourseInstructor>() 
                 },
             };
             courses.ForEach(s => context.Courses.AddOrUpdate(p => p.CourseID, s));
@@ -211,9 +211,9 @@ namespace ContosoUniversity.Migrations
         void AddOrUpdateInstructor(SchoolContext context, string courseTitle, string instructorName)
         {
             var crs = context.Courses.SingleOrDefault(c => c.Title == courseTitle);
-            var inst = crs.Instructors.SingleOrDefault(i => i.LastName == instructorName);
+            var inst = crs.CourseInstructors.SingleOrDefault(i => i.Instructor.LastName == instructorName);
             if (inst == null)
-                crs.Instructors.Add(context.Instructors.Single(i => i.LastName == instructorName));
+                crs.CourseInstructors.Add(new CourseInstructor { Course = crs, Instructor = context.Instructors.Single(i => i.LastName == instructorName)});
         }
     }
 }
