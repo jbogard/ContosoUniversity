@@ -1,4 +1,5 @@
-﻿@model ContosoUniversity.Features.Instructor.CreateEdit.Command
+﻿@using ContosoUniversity.Features.Instructor
+@model CreateEdit.Command
 
 @{
     ViewBag.Title = Model.Id == null ? "Create" : "Edit";
@@ -59,7 +60,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @(Html.Link<UiController>(c => c.Index(null), "Back to List"))
 </div>
 
 @section Scripts {

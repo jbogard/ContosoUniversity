@@ -10,13 +10,12 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-@using (Html.BeginForm())
-{
+<form method="GET">
     <p>
         Select Department: @Html.DropDownList("SelectedDepartment", "All")
         <input type="submit" value="Filter" />
     </p>
-}
+</form>
 
 <table class="table">
     <tr>

@@ -1,4 +1,5 @@
-﻿@model ContosoUniversity.Features.Instructor.Details.Model
+﻿@using ContosoUniversity.Features.Instructor
+@model Details.Model
 
 @{
     ViewBag.Title = "Details";
@@ -45,6 +46,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @(Html.Link<UiController>(c => c.Edit(new CreateEdit.Query { Id = Model.ID})))
+    @(Html.Link<UiController>(c => c.Index(null), "Back to List"))
 </p>

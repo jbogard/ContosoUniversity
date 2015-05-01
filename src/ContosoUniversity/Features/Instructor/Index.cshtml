@@ -52,10 +52,10 @@
             </td>
 
             <td>
-                @Html.ActionLink("Select", "Index", new {id = item.ID}) |
-                @Html.ActionLink("Edit", "Edit", new {id = item.ID}) |
-                @Html.ActionLink("Details", "Details", new {id = item.ID}) |
-                @Html.ActionLink("Delete", "Delete", new {id = item.ID})
+                @(Html.Link<UiController>(c => c.Index(new Index.Query { Id = item.ID }), "Select")) |
+                @(Html.Link<UiController>(c => c.Edit(new CreateEdit.Query { Id = item.ID }))) |
+                @(Html.Link<UiController>(c => c.Details(new Details.Query { Id = item.ID }))) |
+                @(Html.Link<UiController>(c => c.Delete(new Delete.Query { Id = item.ID })))
             </td>
         </tr>
         i++;

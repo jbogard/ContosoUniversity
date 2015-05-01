@@ -1,4 +1,5 @@
-﻿@model ContosoUniversity.Features.Instructor.Delete.Command
+﻿@using ContosoUniversity.Features.Instructor
+@model Delete.Command
 
 @{
     ViewBag.Title = "Delete";
@@ -50,7 +51,7 @@
         @Html.Input(m => m.ID)
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @(Html.Link<UiController>(c => c.Index(null), "Back to List"))
         </div>
     }
 </div>
