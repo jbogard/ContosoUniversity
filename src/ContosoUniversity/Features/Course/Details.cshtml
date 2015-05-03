@@ -1,4 +1,4 @@
-﻿@model ContosoUniversity.Models.Course
+﻿@model ContosoUniversity.Features.Course.Details.Model
 
 @{
     ViewBag.Title = "Details";
@@ -15,31 +15,31 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Department.Name)
+            @Html.Display(model => model.DepartmentName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CourseID)
+            @Html.DisplayLabel(model => model.CourseID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CourseID)
+            @Html.Display(model => model.CourseID)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayLabel(model => model.Title)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Title)
+            @Html.Display(model => model.Title)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Credits)
+            @Html.DisplayLabel(model => model.Credits)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Credits)
+            @Html.Display(model => model.Credits)
         </dd>
 
     </dl>

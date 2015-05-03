@@ -200,6 +200,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
+    <Compile Include="Features\Course\Create.cs" />
+    <Compile Include="Features\Course\Delete.cs" />
+    <Compile Include="Features\Course\Details.cs" />
+    <Compile Include="Features\Course\Edit.cs" />
+    <Compile Include="Features\Course\Index.cs" />
+    <Compile Include="Features\Course\MappingProfile.cs" />
     <Compile Include="Features\Instructor\CreateEdit.cs" />
     <Compile Include="Features\Instructor\Delete.cs" />
     <Compile Include="Features\Instructor\Details.cs" />
@@ -240,7 +246,9 @@
     <Compile Include="Infrastructure\ControllerExtensions.cs" />
     <Compile Include="Infrastructure\ControllerFactory.cs" />
     <Compile Include="Infrastructure\DataAccess\MvcTransactionFilter.cs" />
+    <Compile Include="Infrastructure\DepartmentModelBinder.cs" />
     <Compile Include="Infrastructure\InstructorModelBinder.cs" />
+    <Compile Include="Infrastructure\DepartmentModelBinderProvider.cs" />
     <Compile Include="Infrastructure\InstructorModelBinderProvider.cs" />
     <Compile Include="Infrastructure\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\LinkBuilder.cs" />
@@ -250,6 +258,7 @@
     <Compile Include="Infrastructure\Mapping\MappingExtensions.cs" />
     <Compile Include="Infrastructure\Tags\DefaultAspNetMvcHtmlConventions.cs" />
     <Compile Include="Infrastructure\Tags\DefaultDisplayLabelBuilder.cs" />
+    <Compile Include="Infrastructure\Tags\DepartmentSelectElementBuilder.cs" />
     <Compile Include="Infrastructure\Tags\InstructorSelectElementBuilder.cs" />
     <Compile Include="Infrastructure\Tags\EntitySelectElementBuilder.cs" />
     <Compile Include="Infrastructure\Tags\HtmlTagExtensions.cs" />
