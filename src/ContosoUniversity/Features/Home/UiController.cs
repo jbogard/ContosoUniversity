@@ -8,7 +8,7 @@
 
     public class UiController : Controller
     {
-        private SchoolContext db = new SchoolContext();
+        private SchoolContext db = new SchoolContext("SchoolContext");
 
         public ActionResult Index()
         {

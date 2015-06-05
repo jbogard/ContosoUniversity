@@ -40,7 +40,7 @@ namespace ContosoUniversity.DependencyResolution {
                     scan.AddAllTypesOf(typeof(IModelBinderProvider));
                     scan.With(new ControllerConvention());
                 });
-            For<SchoolContext>().Use<SchoolContext>().LifecycleIs<TransientLifecycle>();
+            For<SchoolContext>().Use(() => new SchoolContext("SchoolContext")).LifecycleIs<TransientLifecycle>();
             For<IControllerFactory>().Use<ControllerFactory>();
             For<ModelValidatorProvider>().Use<FluentValidationModelValidatorProvider>();
             For<IValidatorFactory>().Use<StructureMapValidatorFactory>();

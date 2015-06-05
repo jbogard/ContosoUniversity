@@ -14,7 +14,15 @@
     {
         public class Query : IAsyncRequest<Command>
         {
-            public int Id { get; set; }
+            public int? Id { get; set; }
+        }
+
+        public class QueryValidator : AbstractValidator<Query>
+        {
+            public QueryValidator()
+            {
+                RuleFor(m => m.Id).NotNull();
+            }
         }
 
         public class Command : IAsyncRequest
@@ -49,7 +57,9 @@
 
             public async Task<Command> Handle(Query message)
             {
-                return await _db.Students.Where(s => s.ID == message.Id).ProjectToSingleOrDefaultAsync<Command>();
+                return await _db.Students
+                    .Where(s => s.ID == message.Id)
+                    .ProjectToSingleOrDefaultAsync<Command>();
             }
         }
 

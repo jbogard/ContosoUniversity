@@ -139,8 +139,8 @@
         private static IElementGenerator<T> GetGenerator<T>(T model) where T : class
         {
             var library =
-                StructuremapMvc.StructureMapDependencyScope.CurrentNestedContainer.GetInstance<HtmlConventionLibrary>();
-            return ElementGenerator<T>.For(library, t => StructuremapMvc.StructureMapDependencyScope.CurrentNestedContainer.GetInstance(t), model);
+                StructuremapMvc.ParentScope.CurrentNestedContainer.GetInstance<HtmlConventionLibrary>();
+            return ElementGenerator<T>.For(library, t => StructuremapMvc.ParentScope.CurrentNestedContainer.GetInstance(t), model);
         }
     }
 }

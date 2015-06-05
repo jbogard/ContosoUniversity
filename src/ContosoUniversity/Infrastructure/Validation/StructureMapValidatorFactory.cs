@@ -8,7 +8,7 @@
     {
         public override IValidator CreateInstance(Type validatorType)
         {
-            return StructuremapMvc.StructureMapDependencyScope.CurrentNestedContainer.TryGetInstance(validatorType) as IValidator;
+            return StructuremapMvc.ParentScope.CurrentNestedContainer.TryGetInstance(validatorType) as IValidator;
         }
     }
 }

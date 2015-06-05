@@ -24,91 +24,91 @@ namespace ContosoUniversity.DependencyResolution {
     using Microsoft.Practices.ServiceLocation;
 
     using StructureMap;
-	
+
     /// <summary>
     /// The structure map dependency scope.
     /// </summary>
-    public class StructureMapDependencyScope : ServiceLocatorImplBase {
-        #region Constants and Fields
+    public class StructureMapDependencyScope : ServiceLocatorImplBase
+    {
+        private readonly INestedContainerScope _nestedContainerScope;
 
-        private const string NestedContainerKey = "Nested.Container.Key";
+        /// <summary>
+        /// Initializes the scope using a <see cref="TransientNestedContainerScope"/> container)
+        /// </summary>
+        public StructureMapDependencyScope(IContainer container)
+            : this(container, new TransientNestedContainerScope())
+        {
 
-        #endregion
+        }
 
-        #region Constructors and Destructors
-
-        public StructureMapDependencyScope(IContainer container) {
-            if (container == null) {
+        public StructureMapDependencyScope(IContainer container, INestedContainerScope nestedContainerScope)
+        {
+            if (container == null)
+            {
                 throw new ArgumentNullException("container");
             }
             Container = container;
+            _nestedContainerScope = nestedContainerScope;
         }
 
-        #endregion
-
-        #region Public Properties
 
         public IContainer Container { get; set; }
 
-        public IContainer CurrentNestedContainer {
-            get {
-                return (IContainer)HttpContext.Items[NestedContainerKey];
-            }
-            set {
-                HttpContext.Items[NestedContainerKey] = value;
-            }
+        public IContainer CurrentNestedContainer
+        {
+            get { return _nestedContainerScope.NestedContainer; }
+            set { _nestedContainerScope.NestedContainer = value; }
         }
 
-        #endregion
-
-        #region Properties
-
-        private HttpContextBase HttpContext {
-            get {
-                var ctx = Container.TryGetInstance<HttpContextBase>();
-                return ctx ?? new HttpContextWrapper(System.Web.HttpContext.Current);
-            }
-        }
-
-        #endregion
-
-        #region Public Methods and Operators
-
-        public void CreateNestedContainer() {
-            if (CurrentNestedContainer != null) {
+        public void CreateNestedContainer()
+        {
+            if (CurrentNestedContainer != null)
+            {
                 return;
             }
+
             CurrentNestedContainer = Container.GetNestedContainer();
         }
 
-        public void Dispose() {
+        public void Dispose()
+        {
             DisposeNestedContainer();
-            Container.Dispose();
         }
 
-        public void DisposeNestedContainer() {
-            if (CurrentNestedContainer != null) {
+        public void DisposeNestedContainer()
+        {
+            if (CurrentNestedContainer != null)
+            {
                 CurrentNestedContainer.Dispose();
-				CurrentNestedContainer = null;
+                CurrentNestedContainer = null;
             }
         }
 
-        public IEnumerable<object> GetServices(Type serviceType) {
+        public void DisposeParentContainer()
+        {
+            if (Container != null)
+            {
+                Container.Dispose();
+                Container = null;
+            }
+        }
+
+        public IEnumerable<object> GetServices(Type serviceType)
+        {
             return DoGetAllInstances(serviceType);
         }
 
-        #endregion
-
-        #region Methods
-
-        protected override IEnumerable<object> DoGetAllInstances(Type serviceType) {
+        protected override IEnumerable<object> DoGetAllInstances(Type serviceType)
+        {
             return (CurrentNestedContainer ?? Container).GetAllInstances(serviceType).Cast<object>();
         }
 
-        protected override object DoGetInstance(Type serviceType, string key) {
+        protected override object DoGetInstance(Type serviceType, string key)
+        {
             IContainer container = (CurrentNestedContainer ?? Container);
 
-            if (string.IsNullOrEmpty(key)) {
+            if (string.IsNullOrEmpty(key))
+            {
                 return serviceType.IsAbstract || serviceType.IsInterface
                     ? container.TryGetInstance(serviceType)
                     : container.GetInstance(serviceType);
@@ -117,6 +117,20 @@ namespace ContosoUniversity.DependencyResolution {
             return container.GetInstance(serviceType, key);
         }
 
-        #endregion
+        public object TryGetInstance(Type type)
+        {
+            IContainer container = (CurrentNestedContainer ?? Container);
+            return container.TryGetInstance(type);
+        }
+    }
+
+    public interface INestedContainerScope
+    {
+        IContainer NestedContainer { get; set; }
+    }
+
+    public class TransientNestedContainerScope : INestedContainerScope
+    {
+        public IContainer NestedContainer { get; set; }
     }
 }

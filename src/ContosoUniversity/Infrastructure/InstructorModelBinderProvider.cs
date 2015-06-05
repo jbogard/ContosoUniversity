@@ -9,7 +9,7 @@
     {
         public IModelBinder GetBinder(Type modelType)
         {
-            return typeof(Instructor).IsAssignableFrom(modelType) ? StructuremapMvc.StructureMapDependencyScope.GetInstance<InstructorModelBinder>() : null;
+            return typeof(Instructor).IsAssignableFrom(modelType) ? StructuremapMvc.ParentScope.GetInstance<InstructorModelBinder>() : null;
         }
     }
 }

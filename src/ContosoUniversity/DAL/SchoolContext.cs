@@ -12,6 +12,11 @@ namespace ContosoUniversity.DAL
     {
         private DbContextTransaction _currentTransaction;
 
+
+        public SchoolContext(string nameOrConnectionString) : base(nameOrConnectionString)
+        {
+        }
+
         public DbSet<Course> Courses { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
