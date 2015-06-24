@@ -82,10 +82,10 @@
     </Reference>
     <Reference Include="roundhouse, Version=0.8.6.0, Culture=neutral, PublicKeyToken=91b86fd44f1f23bc, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\roundhouse\product\bin\roundhouse.dll</HintPath>
+      <HintPath>..\..\tools\roundhouse\product\bin\roundhouse.dll</HintPath>
     </Reference>
     <Reference Include="roundhouse.databases.sqlserver">
-      <HintPath>..\..\..\roundhouse\product\bin\roundhouse.databases.sqlserver.dll</HintPath>
+      <HintPath>..\..\tools\roundhouse\product\bin\roundhouse.databases.sqlserver.dll</HintPath>
     </Reference>
     <Reference Include="Shouldly">
       <HintPath>..\packages\Shouldly.2.5.0\lib\net40\Shouldly.dll</HintPath>
