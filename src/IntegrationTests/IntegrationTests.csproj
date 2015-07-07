@@ -118,6 +118,7 @@
     <Compile Include="AutoFixtureFactory.cs" />
     <Compile Include="ContainerBuilder.cs" />
     <Compile Include="DeleteData.cs" />
+    <Compile Include="Features\Course\CreateTests.cs" />
     <Compile Include="Features\FooTests.cs" />
     <Compile Include="FixieConvention.cs" />
     <Compile Include="FixieExtensions.cs" />

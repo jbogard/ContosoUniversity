@@ -21,6 +21,11 @@
 
                 if (isIEnumerable)
                 {
+                    if (pi.PropertyType.IsArray)
+                    {
+                        return Array.CreateInstance(pi.PropertyType.GetElementType(), 0);
+                    }
+
                     var genericArguments = pi.PropertyType.GetGenericArguments();
                     var concreteType = typeof(List<>).MakeGenericType(genericArguments);
                     var instance = Activator.CreateInstance(concreteType);

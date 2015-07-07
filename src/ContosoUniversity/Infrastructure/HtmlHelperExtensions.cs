@@ -2,19 +2,42 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq.Expressions;
     using System.Threading.Tasks;
+    using System.Web;
     using System.Web.Mvc;
     using System.Web.Mvc.Html;
     using System.Web.Routing;
     using App_Start;
     using FluentValidation.Internal;
+    using Glimpse.AspNet.Tab;
     using HtmlTags;
     using HtmlTags.Conventions;
     using HtmlTags.Conventions.Elements;
 
     public static class HtmlHelperExtensions
     {
+        public static string RequireJs(this HtmlHelper helper)
+        {
+            var values = helper.ViewContext.RouteData.Values;
+            var controllerName = values["controller"].ToString();
+            var viewContext = (RazorView)helper.ViewContext.View;
+            var viewName = Path.GetFileNameWithoutExtension(viewContext.ViewPath);
+            var requirePath = VirtualPathUtility.ToAbsolute("~/Content/js/lib/require-2.1.18.js");
+
+            var loc = string.Format("~/Features/{0}/{1}.js", controllerName, viewName);
+
+            if (File.Exists(helper.ViewContext.HttpContext.Server.MapPath(loc)))
+            {
+                var scriptBlock = "<script data-main='{0}' src='{1}'></script>";
+
+                return string.Format(scriptBlock, VirtualPathUtility.ToAbsolute(loc), requirePath);
+            }
+
+            return string.Empty;
+        }
+
         public static HtmlTag Input<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression)
             where T : class
         {

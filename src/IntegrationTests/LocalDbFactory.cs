@@ -44,8 +44,6 @@
                 c.ConnectionString = connectionString;
                 c.DatabaseName = databaseName;
                 c.Silent = true;
-                c.DoNotCreateDatabase = false;
-                //c.Logger = new ConsoleLogger();
                 c.WithTransaction = true;
                 c.SqlFilesDirectory = Path.Combine(Environment.CurrentDirectory, "DatabaseMigration");
             });

@@ -5,9 +5,9 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
+    using AutoMapper;
     using DAL;
     using FluentValidation;
-    using Infrastructure.Mapping;
     using MediatR;
     using Models;
 
