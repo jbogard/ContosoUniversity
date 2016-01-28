@@ -3,6 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using AutoMapper;
     using DAL;
     using Infrastructure.Mapping;
     using MediatR;
@@ -42,10 +43,12 @@
         public class QueryHandler : IRequestHandler<Query, Result>
         {
             private readonly SchoolContext _db;
+            private readonly MapperConfiguration _config;
 
-            public QueryHandler(SchoolContext db)
+            public QueryHandler(SchoolContext db, MapperConfiguration config)
             {
                 _db = db;
+                _config = config;
             }
 
             public Result Handle(Query message)
@@ -94,7 +97,7 @@
 
                 int pageSize = 3;
                 int pageNumber = (message.Page ?? 1);
-                model.Results = students.ProjectToPagedList<Model>(pageNumber, pageSize);
+                model.Results = students.ProjectToPagedList<Model>(_config, pageNumber, pageSize);
 
                 return model;
             }

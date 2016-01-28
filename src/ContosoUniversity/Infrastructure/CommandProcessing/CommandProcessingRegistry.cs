@@ -2,9 +2,7 @@
 {
     using FluentValidation;
     using MediatR;
-    using StructureMap.Configuration.DSL;
-    using StructureMap.Graph;
-    using Validation;
+    using StructureMap;
 
     public class CommandProcessingRegistry : Registry
     {

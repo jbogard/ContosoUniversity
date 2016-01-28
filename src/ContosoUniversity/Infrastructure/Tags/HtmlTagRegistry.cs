@@ -1,7 +1,8 @@
-﻿namespace ContosoUniversity.Infrastructure.Tags
+﻿using StructureMap;
+
+namespace ContosoUniversity.Infrastructure.Tags
 {
     using HtmlTags.Conventions;
-    using StructureMap.Configuration.DSL;
 
     public class HtmlTagRegistry : Registry
     {

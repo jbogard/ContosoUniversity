@@ -33,15 +33,17 @@
         public class Handler : IAsyncRequestHandler<Query, Model>
         {
             private readonly SchoolContext _db;
+            private readonly MapperConfiguration _config;
 
-            public Handler(SchoolContext db)
+            public Handler(SchoolContext db, MapperConfiguration config)
             {
                 _db = db;
+                _config = config;
             }
 
             public async Task<Model> Handle(Query message)
             {
-                return await _db.Courses.Where(i => i.CourseID == message.Id).ProjectToSingleOrDefaultAsync<Model>();
+                return await _db.Courses.Where(i => i.CourseID == message.Id).ProjectToSingleOrDefaultAsync<Model>(_config);
             }
         }
     }

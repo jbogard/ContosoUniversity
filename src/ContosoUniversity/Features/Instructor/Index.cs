@@ -70,17 +70,19 @@
         public class Handler : IAsyncRequestHandler<Query, Model>
         {
             private readonly SchoolContext _db;
+            private readonly MapperConfiguration _config;
 
-            public Handler(SchoolContext db)
+            public Handler(SchoolContext db, MapperConfiguration config)
             {
                 _db = db;
+                _config = config;
             }
 
             public async Task<Model> Handle(Query message)
             {
                 var instructors = await _db.Instructors
                     .OrderBy(i => i.LastName)
-                    .ProjectToListAsync<Model.Instructor>();
+                    .ProjectToListAsync<Model.Instructor>(_config);
 
                 var courses = new List<Model.Course>();
                 var enrollments = new List<Model.Enrollment>();
@@ -90,14 +92,14 @@
                     courses = await _db.CourseInstructors
                         .Where(ci => ci.InstructorID == message.Id)
                         .Select(ci => ci.Course)
-                        .ProjectToListAsync<Model.Course>();
+                        .ProjectToListAsync<Model.Course>(_config);
                 }
 
                 if (message.CourseID != null)
                 {
                     enrollments = await _db.Enrollments
                         .Where(x => x.CourseID == message.CourseID)
-                        .ProjectToListAsync<Model.Enrollment>();
+                        .ProjectToListAsync<Model.Enrollment>(_config);
                 }
 
                 var viewModel = new Model

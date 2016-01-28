@@ -42,15 +42,17 @@
         public class CommandHandler : RequestHandler<Command>
         {
             private readonly SchoolContext _context;
+            private readonly IMapper _mapper;
 
-            public CommandHandler(SchoolContext context)
+            public CommandHandler(SchoolContext context, IMapper mapper)
             {
                 _context = context;
+                _mapper = mapper;
             }
 
             protected override void HandleCore(Command message)
             {
-                var department = Mapper.Map<Command, Department>(message);
+                var department = _mapper.Map<Command, Department>(message);
 
                 _context.Departments.Add(department);
             }

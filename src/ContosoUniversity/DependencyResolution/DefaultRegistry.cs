@@ -15,6 +15,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using StructureMap;
+
 namespace ContosoUniversity.DependencyResolution {
     using System.Web.Mvc;
     using DAL;

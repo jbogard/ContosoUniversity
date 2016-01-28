@@ -48,7 +48,6 @@ namespace ContosoUniversity.App_Start {
             ParentScope = new StructureMapDependencyScope(container, new HttpContextNestedContainerScope());
             DependencyResolver.SetResolver(ParentScope);
             DynamicModuleUtility.RegisterModule(typeof(StructureMapScopeModule));
-            AutoMapperBootstrapper.Initialize(ParentScope.Container);
         }
     }
 

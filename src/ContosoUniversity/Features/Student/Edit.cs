@@ -49,34 +49,38 @@
         public class QueryHandler : IAsyncRequestHandler<Query, Command>
         {
             private readonly SchoolContext _db;
+            private readonly MapperConfiguration _config;
 
-            public QueryHandler(SchoolContext db)
+            public QueryHandler(SchoolContext db, MapperConfiguration config)
             {
                 _db = db;
+                _config = config;
             }
 
             public async Task<Command> Handle(Query message)
             {
                 return await _db.Students
                     .Where(s => s.ID == message.Id)
-                    .ProjectToSingleOrDefaultAsync<Command>();
+                    .ProjectToSingleOrDefaultAsync<Command>(_config);
             }
         }
 
         public class CommandHandler : AsyncRequestHandler<Command>
         {
             private readonly SchoolContext _db;
+            private readonly IMapper _mapper;
 
-            public CommandHandler(SchoolContext db)
+            public CommandHandler(SchoolContext db, IMapper mapper)
             {
                 _db = db;
+                _mapper = mapper;
             }
 
             protected override async Task HandleCore(Command message)
             {
                 var student = await _db.Students.FindAsync(message.ID);
 
-                Mapper.Map(message, student);
+                _mapper.Map(message, student);
             }
         }
     }

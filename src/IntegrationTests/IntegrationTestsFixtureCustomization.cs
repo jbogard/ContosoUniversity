@@ -15,8 +15,6 @@
             //fixture.Customizations.Add(scope.GetInstance<IntegrationTestDefaultValueBuilder>());
             fixture.Register(() => contextFixture);
             fixture.Customizations.Add(new ContainerBuilder(scope)); // always last
-
-            AutoMapperBootstrapper.Initialize(scope.Container);
         }
     }
 }

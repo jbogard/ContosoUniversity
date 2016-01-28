@@ -34,17 +34,19 @@
         public class QueryHandler : IAsyncRequestHandler<Query, Command>
         {
             private readonly SchoolContext _db;
+            private readonly MapperConfiguration _config;
 
-            public QueryHandler(SchoolContext db)
+            public QueryHandler(SchoolContext db, MapperConfiguration config)
             {
                 _db = db;
+                _config = config;
             }
 
             public async Task<Command> Handle(Query message)
             {
                 var department = await _db.Departments
                     .Where(d => d.DepartmentID == message.Id)
-                    .ProjectToSingleOrDefaultAsync<Command>();
+                    .ProjectToSingleOrDefaultAsync<Command>(_config);
 
                 return department;
             }
