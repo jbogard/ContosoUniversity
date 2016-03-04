@@ -4,13 +4,13 @@
     using ContosoUniversity.ViewModels;
     using MediatR;
     using System.Collections.Generic;
-    using System.Linq;
+    using System.Threading.Tasks;
 
     public class About
     {
-        public class Query : IRequest<IEnumerable<EnrollmentDateGroup>> { }
+        public class Query : IAsyncRequest<IEnumerable<EnrollmentDateGroup>> { }
 
-        public class Handler : IRequestHandler<Query, IEnumerable<EnrollmentDateGroup>>
+        public class Handler : IAsyncRequestHandler<Query, IEnumerable<EnrollmentDateGroup>>
         {
             private readonly SchoolContext _dbContext;
 
@@ -19,7 +19,7 @@
                 _dbContext = dbContext;
             }
 
-            public IEnumerable<EnrollmentDateGroup> Handle(Query message)
+            public async Task<IEnumerable<EnrollmentDateGroup>> Handle(Query message)
             {
                 // Commenting out LINQ to show how to do the same thing in SQL.
                 //IQueryable<EnrollmentDateGroup> = from student in db.Students
@@ -35,9 +35,9 @@
                     + "FROM Person "
                     + "WHERE Discriminator = 'Student' "
                     + "GROUP BY EnrollmentDate";
-                IEnumerable<EnrollmentDateGroup> data = _dbContext.Database.SqlQuery<EnrollmentDateGroup>(query);
+                IEnumerable<EnrollmentDateGroup> data = await _dbContext.Database.SqlQuery<EnrollmentDateGroup>(query).ToListAsync();
 
-                return data.ToList();
+                return data;
             }
         }
     }

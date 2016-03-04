@@ -1,7 +1,7 @@
 ﻿namespace ContosoUniversity.Features.Home
 {
     using MediatR;
-    using System.Linq;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
 
     public class UiController : Controller
@@ -18,9 +18,9 @@
             return View();
         }
 
-        public ActionResult About()
+        public async Task<ActionResult> About()
         {
-            var data = _mediator.Send(new About.Query());
+            var data = await _mediator.SendAsync(new About.Query());
 
             return View(data);
         }
