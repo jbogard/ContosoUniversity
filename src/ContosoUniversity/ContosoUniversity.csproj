@@ -214,6 +214,7 @@
     <Compile Include="Features\Course\Edit.cs" />
     <Compile Include="Features\Course\Index.cs" />
     <Compile Include="Features\Course\MappingProfile.cs" />
+    <Compile Include="Features\Home\About.cs" />
     <Compile Include="Features\Instructor\CreateEdit.cs" />
     <Compile Include="Features\Instructor\Delete.cs" />
     <Compile Include="Features\Instructor\Details.cs" />
