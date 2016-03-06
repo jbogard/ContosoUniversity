@@ -1,13 +1,22 @@
 ﻿namespace ContosoUniversity.Features.Home
 {
     using ContosoUniversity.DAL;
-    using ContosoUniversity.ViewModels;
     using MediatR;
+    using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
 
     public class About
     {
+        public class EnrollmentDateGroup
+        {
+            [DataType(DataType.Date)]
+            public DateTime? EnrollmentDate { get; set; }
+
+            public int StudentCount { get; set; }
+        }
+
         public class Query : IAsyncRequest<IEnumerable<EnrollmentDateGroup>> { }
 
         public class Handler : IAsyncRequestHandler<Query, IEnumerable<EnrollmentDateGroup>>
