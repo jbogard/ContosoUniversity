@@ -1,51 +1,35 @@
 ﻿namespace ContosoUniversity.Features.Home
 {
-    using System.Collections.Generic;
-    using System.Linq;
+    using MediatR;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
-    using DAL;
-    using ViewModels;
 
     public class UiController : Controller
     {
-        private SchoolContext db = new SchoolContext("SchoolContext");
+        private readonly IMediator _mediator;
+
+        public UiController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
+        public async Task<ActionResult> About()
         {
-            // Commenting out LINQ to show how to do the same thing in SQL.
-            //IQueryable<EnrollmentDateGroup> = from student in db.Students
-            //           group student by student.EnrollmentDate into dateGroup
-            //           select new EnrollmentDateGroup()
-            //           {
-            //               EnrollmentDate = dateGroup.Key,
-            //               StudentCount = dateGroup.Count()
-            //           };
+            var data = await _mediator.SendAsync(new About.Query());
 
-            // SQL version of the above LINQ code.
-            string query = "SELECT EnrollmentDate, COUNT(*) AS StudentCount "
-                + "FROM Person "
-                + "WHERE Discriminator = 'Student' "
-                + "GROUP BY EnrollmentDate";
-            IEnumerable<EnrollmentDateGroup> data = db.Database.SqlQuery<EnrollmentDateGroup>(query);
-
-            return View(data.ToList());
+            return View(data);
         }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
             return View();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
         }
     }
 }

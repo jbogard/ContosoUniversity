@@ -214,6 +214,7 @@
     <Compile Include="Features\Course\Edit.cs" />
     <Compile Include="Features\Course\Index.cs" />
     <Compile Include="Features\Course\MappingProfile.cs" />
+    <Compile Include="Features\Home\About.cs" />
     <Compile Include="Features\Instructor\CreateEdit.cs" />
     <Compile Include="Features\Instructor\Delete.cs" />
     <Compile Include="Features\Instructor\Details.cs" />
@@ -309,9 +310,6 @@
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\AssignedCourseData.cs" />
-    <Compile Include="ViewModels\EnrollmentDateGroup.cs" />
-    <Compile Include="ViewModels\InstructorIndexData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -429,7 +427,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>12810</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
