@@ -10,7 +10,7 @@
         {
             return
                 typeof (ControllerFactory).Assembly.GetType("ContosoUniversity.Features." + controllerName +
-                                                            ".UiController");
+                                                            ".UiController", false, true);
         }
     }
 }
