@@ -12,6 +12,7 @@ namespace ContosoUniversity.DAL
     {
         private DbContextTransaction _currentTransaction;
 
+        public SchoolContext() {}
 
         public SchoolContext(string nameOrConnectionString) : base(nameOrConnectionString)
         {
@@ -25,6 +26,8 @@ namespace ContosoUniversity.DAL
         public DbSet<OfficeAssignment> OfficeAssignments { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<CourseInstructor> CourseInstructors { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
