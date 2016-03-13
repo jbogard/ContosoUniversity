@@ -26,7 +26,7 @@
                 throw new ArgumentException("roleName");
             }
 
-            user.Roles.Add(role);
+            user.AddToRole(role);
         }
 
         public Task CreateAsync(User user)
@@ -73,8 +73,7 @@
 
             if (user.LockoutEndDateUtc.HasValue)
             {
-                var lockoutEndDateUtc = user.LockoutEndDateUtc;
-                dateTimeOffset = new DateTimeOffset(DateTime.SpecifyKind(lockoutEndDateUtc.Value, DateTimeKind.Utc));
+                dateTimeOffset = new DateTimeOffset(DateTime.SpecifyKind(user.LockoutEndDateUtc.Value, DateTimeKind.Utc));
             }
             else
             {
@@ -112,19 +111,16 @@
 
         public Task<bool> IsInRoleAsync(User user, string roleName)
         {
-            return Task.FromResult(user.Roles.Any(r => r.Name == roleName));
+            return Task.FromResult(user.IsInRole(roleName));
         }
 
         public Task RemoveFromRoleAsync(User user, string roleName)
         {
-            var role = user.Roles.SingleOrDefault(r => r.Name == roleName);
-
-            if (role == null)
+            if (user.IsInRole(roleName))
             {
-                throw new ArgumentException("roleName");
+                user.RemoveFromRole(roleName);
             }
 
-            user.Roles.Remove(role);
             return Task.FromResult<object>(null);
         }
 

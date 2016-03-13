@@ -38,7 +38,7 @@
 
             protected override async Task HandleCore(Command message)
             {
-                var user = new User
+                var user = new User(message.Email, message.Email)
                 {
                     Email = message.Email,
                     UserName = message.Email
@@ -51,7 +51,7 @@
                     // Throws an exception: register exception?
                 }
 
-                // Triggers and event: Send confirmation email?
+                // Triggers an event: Send confirmation email?
             }
         }
     }
