@@ -21,6 +21,8 @@
 
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new FeatureViewLocationRazorViewEngine());
+
+            ModelBinders.Binders.DefaultBinder = new ContosoModelBinder();
         }
     }
 }
