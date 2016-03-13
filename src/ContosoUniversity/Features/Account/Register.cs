@@ -38,12 +38,7 @@
 
             protected override async Task HandleCore(Command message)
             {
-                var user = new User(message.Email, message.Email)
-                {
-                    Email = message.Email,
-                    UserName = message.Email
-                };
-
+                var user = new User(message.Email, message.Email);
                 var result = await _userManager.CreateAsync(user, message.Password);
 
                 if (!result.Succeeded)
