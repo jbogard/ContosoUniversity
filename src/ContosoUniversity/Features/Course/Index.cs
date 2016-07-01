@@ -32,12 +32,10 @@
         public class Handler : IAsyncRequestHandler<Query, Result>
         {
             private readonly SchoolContext _db;
-            private readonly MapperConfiguration _config;
 
-            public Handler(SchoolContext db, MapperConfiguration config)
+            public Handler(SchoolContext db)
             {
                 _db = db;
-                _config = config;
             }
 
             public async Task<Result> Handle(Query message)
@@ -49,7 +47,7 @@
                 var courses = await _db.Courses
                     .Where(c => !departmentID.HasValue || c.DepartmentID == departmentID)
                     .OrderBy(d => d.CourseID)
-                    .ProjectToListAsync<Result.Course>(_config);
+                    .ProjectToListAsync<Result.Course>();
 
                 return new Result
                 {

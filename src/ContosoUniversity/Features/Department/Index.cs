@@ -31,18 +31,16 @@
         public class QueryHandler : IAsyncRequestHandler<Query, List<Model>>
         {
             private readonly SchoolContext _context;
-            private readonly MapperConfiguration _config;
 
-            public QueryHandler(SchoolContext context, MapperConfiguration config)
+            public QueryHandler(SchoolContext context)
             {
                 _context = context;
-                _config = config;
             }
 
             public async Task<List<Model>> Handle(Query message)
             {
                 return await _context.Departments
-                  .ProjectToListAsync<Model>(_config);
+                  .ProjectToListAsync<Model>();
             }
         }
     }

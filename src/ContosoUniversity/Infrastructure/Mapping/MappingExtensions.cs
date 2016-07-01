@@ -8,10 +8,9 @@
 
     public static class MapperExtensions
     {
-        public static IPagedList<TDestination> ProjectToPagedList<TDestination>(this IQueryable queryable, MapperConfiguration config,
-            int pageNumber, int pageSize)
+        public static IPagedList<TDestination> ProjectToPagedList<TDestination>(this IQueryable queryable, int pageNumber, int pageSize)
         {
-            return queryable.ProjectTo<TDestination>(config).Decompile().ToPagedList(pageNumber, pageSize);
+            return queryable.ProjectTo<TDestination>().Decompile().ToPagedList(pageNumber, pageSize);
         }
     }
 }

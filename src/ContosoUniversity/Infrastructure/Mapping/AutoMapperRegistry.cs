@@ -15,16 +15,14 @@
                 where typeof (Profile).IsAssignableFrom(t)
                 select (Profile)Activator.CreateInstance(t);
 
-            var config = new MapperConfiguration(cfg =>
+
+            Mapper.Initialize(cfg =>
             {
                 foreach (var profile in profiles)
                 {
                     cfg.AddProfile(profile);
                 }
             });
-
-            For<MapperConfiguration>().Use(config);
-            For<IMapper>().Use(ctx => ctx.GetInstance<MapperConfiguration>().CreateMapper(ctx.GetInstance));
         }
     }
 }

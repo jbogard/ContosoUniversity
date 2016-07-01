@@ -44,19 +44,17 @@
         public class QueryHandler : IAsyncRequestHandler<Query, Command>
         {
             private readonly SchoolContext _db;
-            private readonly MapperConfiguration _config;
 
-            public QueryHandler(SchoolContext db, MapperConfiguration config)
+            public QueryHandler(SchoolContext db)
             {
                 _db = db;
-                _config = config;
             }
 
             public async Task<Command> Handle(Query message)
             {
                 var department = await _db.Departments
                     .Where(d => d.DepartmentID == message.Id)
-                    .ProjectToSingleOrDefaultAsync<Command>(_config);
+                    .ProjectToSingleOrDefaultAsync<Command>();
 
                 return department;
             }
@@ -65,19 +63,17 @@
         public class CommandHandler : AsyncRequestHandler<Command>
         {
             private readonly SchoolContext _db;
-            private readonly IMapper _mapper;
 
-            public CommandHandler(SchoolContext db, IMapper mapper)
+            public CommandHandler(SchoolContext db)
             {
                 _db = db;
-                _mapper = mapper;
             }
 
             protected override async Task HandleCore(Command message)
             {
                 var dept = await _db.Departments.FindAsync(message.DepartmentID);
 
-                _mapper.Map(message, dept);
+                Mapper.Map(message, dept);
             }
         }
     }
