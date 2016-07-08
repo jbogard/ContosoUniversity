@@ -11,7 +11,7 @@
         public class Command : IRequest
         {
             [Display(Name = "Number")]
-            public int CourseID { get; set; }
+            public int CourseNumber { get; set; }
             public string Title { get; set; }
             public int Credits { get; set; }
             public Department Department { get; set; }
