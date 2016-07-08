@@ -12,7 +12,7 @@ namespace ContosoUniversity.Models
         [Display(Name = "Hire Date")]
         public DateTime HireDate { get; set; }
 
-        public virtual ICollection<CourseInstructor> CourseInstructors { get; set; }
+        public virtual ICollection<CourseInstructor> CourseInstructors { get; set; } = new HashSet<CourseInstructor>();
         public virtual OfficeAssignment OfficeAssignment { get; set; }
     }
 
