@@ -7,6 +7,7 @@
     using System.Web.Routing;
     using DAL;
     using Infrastructure;
+    using Infrastructure.Mapping;
 
     public class MvcApplication : HttpApplication
     {
@@ -18,6 +19,7 @@
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             DbInterception.Add(new SchoolInterceptorTransientErrors());
             DbInterception.Add(new SchoolInterceptorLogging());
+            AutoMapperInitializer.Initialize();
 
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new FeatureViewLocationRazorViewEngine());

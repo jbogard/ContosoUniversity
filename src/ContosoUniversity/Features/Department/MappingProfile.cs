@@ -5,7 +5,7 @@
 
     public class MappingProfile : Profile
     {
-        protected override void Configure()
+        public MappingProfile()
         {
             CreateMap<Department, Index.Model>();
             CreateMap<Create.Command, Department>(MemberList.Source);

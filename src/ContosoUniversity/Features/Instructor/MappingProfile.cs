@@ -5,7 +5,7 @@
 
     public class MappingProfile : Profile
     {
-        protected override void Configure()
+        public MappingProfile()
         {
             CreateMap<Instructor, Index.Model.Instructor>();
             CreateMap<CourseInstructor, Index.Model.CourseInstructor>();
