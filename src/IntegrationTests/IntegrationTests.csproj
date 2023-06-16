@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ContosoUniversity.IntegrationTests</RootNamespace>
     <AssemblyName>ContosoUniversity.IntegrationTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr3.Runtime.3.5.1\lib\net40-client\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="DelegateDecompiler, Version=1.0.0.0, Culture=neutral, PublicKeyToken=93b26a10a04705bd, processorArchitecture=MSIL">
       <HintPath>..\packages\DelegateDecompiler.0.18.1\lib\net40-Client\DelegateDecompiler.dll</HintPath>
       <Private>True</Private>
@@ -48,21 +52,21 @@
       <HintPath>..\packages\Fixie.1.0.1\lib\net45\Fixie.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FluentNHibernate, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentNHibernate.2.0.3.0\lib\net40\FluentNHibernate.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="FluentNHibernate, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentNHibernate.2.1.2\lib\net461\FluentNHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.4\lib\net461\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=1.2.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.4\lib\net45-full\log4net.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="log4net, Version=2.0.9.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.10\lib\net45\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MediatR, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MediatR.2.1.0\lib\net45\MediatR.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Build.Framework, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Build.Framework.16.0.461\lib\net472\Microsoft.Build.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -72,48 +76,72 @@
       <HintPath>..\packages\Mono.Reflection.1.1.0.0\lib\Mono.Reflection.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=5.2.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.5.2.5\lib\net461\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Ploeh.AutoFixture, Version=3.48.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoFixture.3.48.0\lib\net40\Ploeh.AutoFixture.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Polly, Version=7.0.0.0, Culture=neutral, PublicKeyToken=c8a3ffc3f8f825cc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Polly.7.1.0\lib\netstandard2.0\Polly.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq.EagerFetching, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.EagerFetching.2.2.0\lib\net45\Remotion.Linq.EagerFetching.dll</HintPath>
+    </Reference>
     <Reference Include="Respawn, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Respawn.0.1.0.0\lib\net45\Respawn.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="roundhouse, Version=0.8.6.0, Culture=neutral, PublicKeyToken=91b86fd44f1f23bc, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\roundhouse\product\bin\roundhouse.dll</HintPath>
+    <Reference Include="roundhouse.core, Version=1.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\roundhouse.core.1.3.1\lib\netstandard2.0\roundhouse.core.dll</HintPath>
     </Reference>
-    <Reference Include="roundhouse.databases.sqlserver">
-      <HintPath>..\..\..\roundhouse\product\bin\roundhouse.databases.sqlserver.dll</HintPath>
+    <Reference Include="roundhouse.databases.sqlserver, Version=1.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\roundhouse.sqlserver.1.3.1\lib\netstandard2.0\roundhouse.databases.sqlserver.dll</HintPath>
     </Reference>
     <Reference Include="Shouldly, Version=2.8.0.0, Culture=neutral, PublicKeyToken=6042cbcb05cbc941, processorArchitecture=MSIL">
       <HintPath>..\packages\Shouldly.2.8.0\lib\net40\Shouldly.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="StructureMap, Version=4.2.0.402, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\structuremap.4.2.0.402\lib\net40\StructureMap.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="StructureMap.Net4, Version=4.2.0.402, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\structuremap.4.2.0.402\lib\net40\StructureMap.Net4.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="StructureMap, Version=4.3.0.449, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StructureMap.4.4.0\lib\net45\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SqlClient, Version=4.5.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.6.1\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.SqlLocalDb, Version=1.14.0.0, Culture=neutral, PublicKeyToken=9a192a7522c9e1a0, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SqlLocalDb.1.14.0\lib\net20\System.Data.SqlLocalDb.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Linq" />
     <Reference Include="System.Runtime" />
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.5.1\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />

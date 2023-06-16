@@ -1,3 +1,4 @@
-@echo Executing psake build with default.ps1 configuration
 @echo off
-powershell.exe -NoProfile -ExecutionPolicy unrestricted -Command "& {Import-Module '.\psake.psm1'; invoke-psake .\default.ps1 %1 -parameters @{"version"="'%2'"}; if ($lastexitcode -ne 0) {write-host "ERROR: $lastexitcode" -fore RED; exit $lastexitcode} }"
+rem Helper script for those who want to run psake from cmd.exe
+
+powershell -NoProfile -ExecutionPolicy Bypass -Command "invoke-psake %*; if ($psake.build_success -eq $false) { exit 1 } else { exit 0 }"

@@ -1,9 +1,9 @@
-﻿namespace ContosoUniversity.IntegrationTests
-{
-    using System;
-    using DependencyResolution;
-    using Ploeh.AutoFixture.Kernel;
+﻿using System;
+using ContosoUniversity.DependencyResolution;
+using Ploeh.AutoFixture.Kernel;
 
+namespace ContosoUniversity.IntegrationTests
+{
     public class ContainerBuilder : ISpecimenBuilder
     {
         private readonly StructureMapDependencyScope scope;
