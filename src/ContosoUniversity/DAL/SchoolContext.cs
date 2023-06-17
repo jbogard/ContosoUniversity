@@ -15,6 +15,7 @@ namespace ContosoUniversity.DAL
 
         public SchoolContext(string nameOrConnectionString) : base(nameOrConnectionString)
         {
+            //Database.SetInitializer(new SchoolInitializer());
         }
 
         public DbSet<Course> Courses { get; set; }

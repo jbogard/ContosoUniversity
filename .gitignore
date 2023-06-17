@@ -182,3 +182,5 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+tools/roundhouse/output
